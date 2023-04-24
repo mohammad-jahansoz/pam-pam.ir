@@ -1,0 +1,149 @@
+<%- include('./includes/head') -%> <%- include('./includes/header') -%>
+
+<!----home--->
+<section class="home" id="home">
+  <div class="home-text">
+    <h1>پَم پَم <br /><span>فروشگاه اینترنتی میوه خشک</span></h1>
+
+    <p>مرغوب ترین میوه خشک که با عشق برای شما ساخته شده</p>
+    <a href="#" class="btn">محصولات</a>
+  </div>
+</section>
+
+<!----featured--->
+<section class="featured" id="featured">
+  <div class="center-text">
+    <h2>دسته بندی محصولات</h2>
+  </div>
+
+  <div class="featured-content">
+    <div class="row">
+      <img src="/images/fruit-dryed.jpg" />
+      <div class="fea-text">
+        <h5>😋میوه خشک😋</h5>
+      </div>
+      <div class="arrow">
+        <a href="/api/product/getProducts/میوه خشک"><i class="bx bx-right-arrow-alt"></i></a>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="/images/fruit-tea.webp" />
+      <div class="fea-text">
+        <h5>🍵چای میوه ای🍵</h5>
+      </div>
+      <div class="arrow">
+        <a href="/api/product/getProducts/چای میوه ای و دمنوش"><i class="bx bx-right-arrow-alt"></i></a>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="/images/advie.jpg" />
+      <div class="fea-text">
+        <h5>🥫ادویه جات🥫</h5>
+      </div>
+      <div class="arrow">
+        <a href="/api/product/getProducts/ادویه"><i class="bx bx-right-arrow-alt"></i></a>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="/images/lavashak.jpg" />
+      <div class="fea-text">
+        <h5>🤤لواشک و ترشی🤤</h5>
+      </div>
+      <div class="arrow">
+        <a href="/api/product/getProducts/لواشک و ترشی"><i class="bx bx-right-arrow-alt"></i></a>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="/images/pack.jpg" />
+      <div class="fea-text">
+        <h5>🎁پک کادویی🎁</h5>
+      </div>
+      <div class="arrow">
+        <a href="/api/product/getProducts/پک"><i class="bx bx-right-arrow-alt"></i></a>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="/images/fruit-freez-dryed.webp" />
+      <div class="fea-text">
+        <h5>😍فریز درایر😍</h5>
+      </div>
+      <div class="arrow">
+        <a href="/api/product/getProducts/میوه خشک منجمد"><i class="bx bx-right-arrow-alt"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!----cta--->
+<section class="cta">
+  <div class="cta-text">
+    <h6>🔥پرفروش ترین🔥</h6>
+    <h4>
+      20% تخفیف<br />
+      13 میوه خوشمزه در یک پک
+    </h4>
+    <a href="#" class="btn">همین الان بخرید!</a>
+  </div>
+</section>
+
+<!----new--->
+<section class="new" id="new">
+  <div class="center-text">
+    <h2>محصولات</h2>
+  </div>
+  <div class="new-content">
+    <% for(const product of products){ %>
+    <div class="box">
+      <img src="<%= product.imageUrl %>" />
+      <h5><%= product.name %></h5>
+      <h6><%= product.price %> تومان</h6>
+      <% if(product.sale){ %>
+      <div class="sale">
+        <h4><%= product.sale %></h4>
+      </div>
+      <% } %>
+      <a href="/api/product/getProduct/<%= product._id %>">مشاهده محصول</a>
+    </div>
+    <% } %>
+  </div>
+  <a href="/api/product/getProducts/all" id="see-more">مشاهده بیشتر...</a>
+</section>
+
+
+
+
+<!----brand--->
+<!-- <section class="brand">
+      <div class="brand-content">
+        <div class="main">
+          <img src="img/brand1.png" />
+        </div>
+
+        <div class="main">
+          <img src="img/brand2.png" />
+        </div>
+
+        <div class="main">
+          <img src="img/brand3.png" />
+        </div>
+
+        <div class="main">
+          <img src="img/brand4.png" />
+        </div>
+
+        <div class="main">
+          <img src="img/brand5.png" />
+        </div>
+
+        <div class="main">
+          <img src="img/brand6.png" />
+        </div>
+      </div>
+    </section> -->
+
+<%- include('./includes/footer') -%>

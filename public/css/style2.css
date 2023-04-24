@@ -1,0 +1,138 @@
+@font-face {
+  font-family: Yekan;
+  src: url("../fonts/Yekan.ttf") format("true type");
+  src: url("../fonts/Yekan.eot");
+  src: url("../fonts/Yekan.eot?#iefix") format("Yekan-opentype");
+  src: url("../fonts/Yekan.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+:root {
+  --bg-color: #0d0f10;
+  /* --bg-color: #343a40; */
+  --text-color: #fff;
+  --main-color: #6ec22f;
+  --big-font: 4.5rem;
+  --h2-font: 3.3rem;
+  --h3-font: 2rem;
+  --normal-font: 1.2rem;
+}
+
+::placeholder {
+  color: black;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ color: black;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+ color: black;
+}
+
+
+.container {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* width: 300px; */
+  height: 100px; }
+  .container .search {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    /* background: var(--main-color); */
+    border-radius: 50%;
+    transition: all 1s;
+    z-index: 4;
+    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.4); }
+    .container .search:hover {
+      cursor: pointer; }
+    .container .search::before {
+      content: "";
+      position: absolute;
+      margin: auto;
+      top: 22px;
+      right: 0;
+      bottom: 0;
+      left: 22px;
+      width: 12px;
+      height: 2px;
+      background: white;
+      transform: rotate(45deg);
+      transition: all .5s; }
+    .container .search::after {
+      content: "";
+      position: absolute;
+      margin: auto;
+      top: -5px;
+      right: 0;
+      bottom: 0;
+      left: -5px;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      border: 2px solid white;
+      transition: all .5s; }
+
+      
+  .container input {
+    font-family: 'Yekan', monospace;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    outline: none;
+    border: none;
+    background: var(--main-color);
+    /* color: white; */
+    text-shadow: 0 0 10px black;
+    padding: 0 20px 0 80px;
+    border-radius: 30px;
+    box-shadow: 0 0 25px 0 var(--main-color), 0 20px 25px 0 rgba(0, 0, 0, 0.2);
+    transition: all 1s;
+    opacity: 0;
+    z-index: 5;
+    font-weight: bolder;
+    letter-spacing: 0.1em; }
+    .container input:hover {
+      cursor: pointer; }
+    .container input:focus {
+      width: 300px;
+      opacity: 1;
+      cursor: text; }
+    .container input:focus ~ .search {
+      /* right: -250px; */
+      right: 250px;
+      background: #151515;
+      z-index: 6; }
+      .container input:focus ~ .search::before {
+        top: 0;
+        left: 0;
+        width: 25px; }
+      .container input:focus ~ .search::after {
+        top: 0;
+        left: 0;
+        width: 25px;
+        height: 2px;
+        border: none;
+        background: white;
+        border-radius: 0%;
+        transform: rotate(-45deg); }
+    .container input::placeholder {
+      color: black;
+      opacity: 0.5;
+      font-weight: bolder; }

@@ -1,0 +1,78 @@
+<%- include('./includes/head') -%> <%- include('./includes/header') -%>
+
+<!----home--->
+<!-- <section class="home" id="home">
+  <div class="home-text">
+    <h1>پَم پَم <br /><span>فروشگاه اینترنتی میوه خشک</span></h1>
+    <p>مرغوب ترین میوه خشک که با عشق برای شما ساخته شده</p>
+    <a href="#" class="btn">محصولات</a>
+  </div>
+</section> -->
+
+<!----featured--->
+
+<!----new--->
+<section class="new" id="new">
+  <div id="sorting" class="center-text">
+    <% if(!search){ %>
+      
+        <!--  -->
+        <h2><%= (category !== "") ? `تمام محصولات ${category}` : "تمام محصولات" %></h2>
+       
+    <div class="sort">
+      <a href="?sort=createdAt" class="<%= (sortBy === "createdAt") ? "selected" : "" %>">جدید ترین</a>
+      <a href="?sort=price" class="<%= (sortBy === "price") ? "selected" : "" %>">گران ترین</a>
+      <a href="?sort=views" class="<%= (sortBy === "views") ? "selected" : "" %>">پربازدید ترین</a>
+      <a href="?sort=likes" class="<%= (sortBy === "likes") ? "selected" : "" %>">محبوب ترین</a>
+    </div>
+<% } %>
+  </div>
+  <hr style="margin-top: 3rem;">
+  <div class="new-content">
+    <% for(const product of products){ %>
+    <div class="box">
+      <img src="<%= product.imageUrl %>" />
+      <h5><%= product.name %></h5>
+      <h6><%= product.price %> تومان</h6>
+      <% if(product.sale){ %>
+      <div class="sale">
+        <h4><%= product.sale %></h4>
+      </div>
+      <% } %>
+      <a href="/api/product/getProduct/<%= product._id %>">مشاهده محصول</a>
+    </div>
+    <% } %>
+  </div>
+  <a href="/api/product/getProducts" id="see-more">مشاهده بیشتر...</a>
+</section>
+
+<!----brand--->
+<!-- <section class="brand">
+      <div class="brand-content">
+        <div class="main">
+          <img src="img/brand1.png" />
+        </div>
+
+        <div class="main">
+          <img src="img/brand2.png" />
+        </div>
+
+        <div class="main">
+          <img src="img/brand3.png" />
+        </div>
+
+        <div class="main">
+          <img src="img/brand4.png" />
+        </div>
+
+        <div class="main">
+          <img src="img/brand5.png" />
+        </div>
+
+        <div class="main">
+          <img src="img/brand6.png" />
+        </div>
+      </div>
+    </section> -->
+
+<%- include('./includes/footer') -%>

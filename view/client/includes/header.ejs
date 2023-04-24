@@ -1,0 +1,20 @@
+<header>
+  <a href="#" class="logo">Pam-Pam.ir</a>
+
+  <ul class="navlist">
+    <li><a href="/">خانه</a></li>
+    <li><a href="#featured">دسته بندی</a></li>
+    <li><a href="#contact">درباره ما</a></li>
+    <div style="position: relative;">
+      <form class="container" method="POST" action="/api/product/getProducts/<%= ( typeof category === 'undefined' || category === "" || category === "all") ? "all" : category  %>">
+        <input type="text" name="search" placeholder="جستجو در <%= ( typeof category === 'undefined' || category === "" || category === "all") ? "تمام محصولات" : `${category} ها` %>">
+        <div class="search"></div>
+       </form>
+    </div>
+  </ul>
+  <div class="header-icons">
+    <a href="#"><i class="bx bx-shopping-bag"></i></a>
+    <a href="#"><i class="bx bxs-user"></i></a>
+    <div class="bx bx-menu" id="menu-icon"></div>
+  </div>
+</header>
