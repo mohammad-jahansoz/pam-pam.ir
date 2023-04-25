@@ -72,54 +72,58 @@ exports.searchProducts = async (req, res, next) => {
 };
 
 exports.getProducts = async (req, res, next) => {
-  const page = parseInt(req.query.page) - 1 || 0;
-  const limit = parseInt(req.query.limit) || 3;
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 1;
   const search = req.body.search || "";
   const category = req.params.category === "all" ? "" : req.params.category;
 
-  let sortBy = (await req.query.sort) || "createdAt";
+  let sortBy = req.query.sort || "createdAt";
   let products;
   if (sortBy === "createdAt" || sortBy === "price") {
-    products = await Product.find({
+    products = await Product.paginate(
+      {
+        name: { $regex: search },
+        category: { $regex: category },
+      },
+      { limit: limit, page: page, sort: [[sortBy, -1]] }
+    );
+  } else if (sortBy === "views" || sortBy === "likes") {
+    const aggregate = Product.aggregate();
+    aggregate.match({
       name: { $regex: search },
       category: { $regex: category },
-    })
+    });
+    aggregate.project({
+      _id: 1,
+      imageUrl: 1,
+      name: 1,
+      price: 1,
+      category: 1,
+      count: 1,
+      viewsSize: { $size: `$${sortBy}` },
+    });
+    const option = {
+      page: page,
+      limit: limit,
+      sort: { viewsSize: -1 },
+    };
 
-      .sort([[sortBy, -1]])
-      .skip(page * limit)
-
-      .limit(limit);
-  } else if (sortBy === "views" || sortBy === "likes") {
-    products = await Product.aggregate([
-      {
-        $project: {
-          _id: 1,
-          imageUrl: 1,
-          name: 1,
-          price: 1,
-          category: 1,
-          count: 1,
-          viewsSize: { $size: `$${sortBy}` },
-        },
-      },
-      { $match: { name: { $regex: search }, category: { $regex: category } } },
-      { $sort: { viewsSize: -1 } },
-    ]);
+    products = await Product.aggregatePaginate(aggregate, option);
   }
-  const TOTAL_PAGE = Math.ceil(products.length / limit);
-  // console.log(products.);
+
   res.render("client/products", {
-    products,
+    products: products.docs,
     search,
     category,
     sortBy,
-    // pagination: {
-    //   totalPage: TOTAL_PAGE,
-    //   hasNext: TOTAL_PAGE > page ? true : false,
-    //   hasPrevious: page !== 1 && page !== 2 ? true : false,
-    //   previousPage: page - 1,
-    //   nextPage: page + 1,
-    //   currentPage: page,
-    // },
+    pagination: {
+      totalProducts: products.totalDocs,
+      totalPages: products.totalPages,
+      hasNextPage: products.hasNextPage,
+      hasPrevPage: products.hasPrevPage,
+      prevPage: products.prevPage,
+      nextPage: products.nextPage,
+      page: products.page,
+    },
   });
 };
