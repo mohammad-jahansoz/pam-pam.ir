@@ -1,0 +1,110 @@
+<%- include('./includes/head') -%> <%- include('./includes/header') -%>
+
+
+
+
+<!-- single product details -->
+<div>
+
+
+<div class="small-container single-product">
+  <div class="row-sp">
+    <div class="col-2">
+      <img src="<%= product.imageUrl[0] %>" alt="" width="100%" id="ProductImg" />
+
+      <div class="small-img-row">
+        <div class="small-img-col">
+          <img src="<%= product.imageUrl[0] %>" alt="" width="100%" class="small-img" />
+        </div>
+        <div class="small-img-col">
+          <img src="<%= product.imageUrl[1] %>" alt="" width="100%" class="small-img" />
+        </div>
+        <div class="small-img-col">
+          <img src="<%= product.imageUrl[2] %>" alt="" width="100%" class="small-img" />
+        </div>
+        <div class="small-img-col">
+          <img src="<%= product.imageUrl[3] %>" alt="" width="100%" class="small-img" />
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <p><%= product.category %></p>
+      <h1><%= product.name %></h1>
+      <h4><%= product.price %> تومان</h4>
+      <!-- <select>
+        <option>Select Size</option>
+        <option>XXL</option>
+        <option>XL</option>
+        <option>L</option>
+        <option>M</option>
+        <option>S</option>
+      </select> -->
+      <input type="number" value="1" min="1" />
+      <a href="" class="btn">افزودن به سبد خرید</a>
+
+      <h3>توضیحات <i class="fas fa-indent"></i></h3>
+      <br />
+      <p>
+        میوه خشک موز یکی از بهترین و خوشمزه ترین میوه هاییه که شما میتونید تهیه کنید و بخورید و بخاطر خواص زیاد و خوشمزگیش خیلی پرطرفداره و تمام مشتری های ما حتما حداقل یک بار ازش خریدن
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- title -->
+<div class="small-container" style="margin-top: 40px;">
+  <div class="">
+    <h2>محصولات مرتبط</h2>
+  </div>
+  <hr >
+</div>
+
+<!-- products -->
+
+<div class="small-container">
+  <div class="row-sp">
+    <% for(const relatedProduct of product.relatedProduct){ %>
+    <div class="col-4">
+      <img src="<%= relatedProduct.imageUrl[0] %>" alt="" />
+      <h4><%= relatedProduct.name %></h4>
+      <div class="rating">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+      </div>
+      <p><%= relatedProduct.price %> تومان</p>
+    </div>
+    <% } %>
+  </div>
+  <hr>
+</div>
+
+</div>
+
+
+
+
+<!-- js for product gallery -->
+
+<script>
+  var ProductImg = document.getElementById('ProductImg');
+  var SmallImg = document.getElementsByClassName('small-img');
+  SmallImg[0].onclick = function() {
+    ProductImg.src = SmallImg[0].src;
+  };
+  SmallImg[1].onclick = function() {
+    ProductImg.src = SmallImg[1].src;
+  };
+  SmallImg[2].onclick = function() {
+    ProductImg.src = SmallImg[2].src;
+  };
+  SmallImg[3].onclick = function() {
+    ProductImg.src = SmallImg[3].src;
+  };
+</script>
+
+
+
+<%- include('./includes/footer') -%>

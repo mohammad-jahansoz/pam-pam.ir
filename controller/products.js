@@ -6,10 +6,14 @@ exports.getProduct = async (req, res, next) => {
     return res.status(200).send("you send invelid id , ply try again");
   }
 
-  const product = await Product.findById(productId);
+  const product = await Product.findById(productId).populate(
+    "relatedProduct",
+    "name price _id imageUrl"
+  );
+  console.log(product);
   if (!product)
     return res.status(404).send(`we havent any product with ${productId} id`);
-  res.status(200).send(product);
+  res.render("client/product", { product });
   // fire and run => first send response to client after query to database.
   await Product.updateOne(
     { _id: new mongoose.Types.ObjectId(productId) },

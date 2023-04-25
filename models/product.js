@@ -13,11 +13,18 @@ const ProductSchema = new Schema(
       maxLength: 255,
       trim: true,
     },
-    imageUrl: {
-      type: String,
-      default:
-        "https://apollobattery.com.au/wp-content/uploads/2022/08/default-product-image.png",
-    },
+    // imageUrl: {
+    //   type: String,
+    //   default:
+    //     "https://apollobattery.com.au/wp-content/uploads/2022/08/default-product-image.png",
+    // },
+    imageUrl: [
+      {
+        type: String,
+        default:
+          "https://apollobattery.com.au/wp-content/uploads/2022/08/default-product-image.png",
+      },
+    ],
     count: {
       type: Number,
       default: 0,
@@ -31,12 +38,7 @@ const ProductSchema = new Schema(
       type: String,
       required: true,
     },
-    relatedProduct: {
-      type: [mongoose.Schema.Types.ObjectId],
-      ref: "Product",
-      default: [],
-      _id: false,
-    },
+    relatedProduct: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
     comments: {
       type: [
         {
