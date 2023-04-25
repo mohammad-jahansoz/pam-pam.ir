@@ -14,18 +14,17 @@
 <!----new--->
 <section class="new" id="new">
   <div id="sorting" class="center-text">
-    <% if(!search){ %>
-        <!--  -->
+    <% if(!search) { %> 
         <h2><%= (category !== "") ? `تمام محصولات ${category}` : "تمام محصولات" %></h2>
+        <% }else{ %>
+          <h2><%= `نتیجه جستجو ${search} : ${pagination.totalProducts} محصول` %></h2>
+          <% } %>
     <div class="sort">
-      <a href="?sort=createdAt" class="<%= (sortBy === "createdAt") ? "selected" : "" %>">جدید ترین</a>
-      <a href="?sort=price" class="<%= (sortBy === "price") ? "selected" : "" %>">گران ترین</a>
-      <a href="?sort=views" class="<%= (sortBy === "views") ? "selected" : "" %>">پربازدید ترین</a>
-      <a href="?sort=likes" class="<%= (sortBy === "likes") ? "selected" : "" %>">محبوب ترین</a>
+      <a href="?search=<%= search %>&sort=createdAt" class="<%= (sortBy === "createdAt") ? "selected" : "" %>">جدید ترین</a>
+      <a href="?search=<%= search %>&sort=price" class="<%= (sortBy === "price") ? "selected" : "" %>">گران ترین</a>
+      <a href="?search=<%= search %>&sort=views" class="<%= (sortBy === "views") ? "selected" : "" %>">پربازدید ترین</a>
+      <a href="?search=<%= search %>&sort=likes" class="<%= (sortBy === "likes") ? "selected" : "" %>">محبوب ترین</a>
     </div>
-<% } else{ %>
-    <h2><%= `نتیجه جستجو ${search}` %></h2>
-  <% } %>
   </div>
   <hr style="margin-top: 3rem;">
   <div class="new-content">
@@ -46,19 +45,19 @@
 
   <section class="pagination">
   <% if(pagination.page !== 1) { %>
-    <a href="?sort=<%= sortBy %>&page=1">1</a>
+    <a href="?search=<%= search %>&sort=<%= sortBy %>&page=1">1</a>
     <% } %>
     <% if(pagination.hasPrevPage && pagination.page !== 1 && pagination.page !== 2){ %>
-      <a href="?sort=<%= sortBy %>&page=<%= pagination.prevPage %>"><%= pagination.prevPage %></a>
+      <a href="?search=<%= search %>&sort=<%= sortBy %>&page=<%= pagination.prevPage %>"><%= pagination.prevPage %></a>
       <% } %>
      
-        <a class="active" href="?sort=<%= sortBy %>&page=<%= pagination.page %>"><%= pagination.page %></a>
+        <a class="active" href="?search=<%= search %>&?sort=<%= sortBy %>&page=<%= pagination.page %>"><%= pagination.page %></a>
         
         <% if(pagination.hasNextPage && pagination.nextPage !== pagination.totalPages){ %>
-          <a href="?sort=<%= sortBy %>&page=<%= pagination.nextPage %>"><%= pagination.nextPage %></a>
+          <a href="?search=<%= search %>&sort=<%= sortBy %>&page=<%= pagination.nextPage %>"><%= pagination.nextPage %></a>
           <% } %>
           <% if(pagination.totalPages !== 1 && pagination.page !== pagination.totalPages){ %>
-            <a href="?sort=<%= sortBy %>&page=<%= pagination.totalPages  %>"><%= pagination.totalPages  %></a>
+            <a href="?search=<%= search %>&sort=<%= sortBy %>&page=<%= pagination.totalPages  %>"><%= pagination.totalPages  %></a>
             <% } %>
             
           </section>
