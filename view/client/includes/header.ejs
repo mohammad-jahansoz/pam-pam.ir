@@ -3,7 +3,7 @@
 
   <ul class="navlist">
     <li><a href="/">خانه</a></li>
-    <li><a href="#featured">دسته بندی</a></li>
+    <li><a href="http://localhost:3000/#featured">دسته بندی</a></li>
     <li><a href="#contact">درباره ما</a></li>
     <div style="position: relative;">
       <form class="container" method="POST" action="/api/product/getProducts/<%= ( typeof category === 'undefined' || category === "" || category === "all") ? "all" : category  %>">

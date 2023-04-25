@@ -15,17 +15,17 @@
 <section class="new" id="new">
   <div id="sorting" class="center-text">
     <% if(!search){ %>
-      
         <!--  -->
         <h2><%= (category !== "") ? `تمام محصولات ${category}` : "تمام محصولات" %></h2>
-       
     <div class="sort">
       <a href="?sort=createdAt" class="<%= (sortBy === "createdAt") ? "selected" : "" %>">جدید ترین</a>
       <a href="?sort=price" class="<%= (sortBy === "price") ? "selected" : "" %>">گران ترین</a>
       <a href="?sort=views" class="<%= (sortBy === "views") ? "selected" : "" %>">پربازدید ترین</a>
       <a href="?sort=likes" class="<%= (sortBy === "likes") ? "selected" : "" %>">محبوب ترین</a>
     </div>
-<% } %>
+<% } else{ %>
+    <h2><%= `نتیجه جستجو ${search}` %></h2>
+  <% } %>
   </div>
   <hr style="margin-top: 3rem;">
   <div class="new-content">
@@ -43,8 +43,9 @@
     </div>
     <% } %>
   </div>
-  <a href="/api/product/getProducts" id="see-more">مشاهده بیشتر...</a>
-</section>
+
+
+
 
 <!----brand--->
 <!-- <section class="brand">
