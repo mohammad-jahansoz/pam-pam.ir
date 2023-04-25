@@ -15,10 +15,10 @@
 <section class="new" id="new">
   <div id="sorting" class="center-text">
     <% if(!search) { %> 
-        <h2><%= (category !== "") ? `تمام محصولات ${category}` : "تمام محصولات" %></h2>
-        <% }else{ %>
-          <h2><%= `نتیجه جستجو ${search} : ${pagination.totalProducts} محصول` %></h2>
-          <% } %>
+    <h2><%= (category !== "") ? `تمام محصولات ${category}` : "تمام محصولات" %></h2>
+    <% }else{ %>
+    <h2><%= `نتیجه جستجو ${search} : ${pagination.totalProducts} محصول` %></h2>
+    <% } %>
     <div class="sort">
       <a href="?search=<%= search %>&sort=createdAt" class="<%= (sortBy === "createdAt") ? "selected" : "" %>">جدید ترین</a>
       <a href="?search=<%= search %>&sort=price" class="<%= (sortBy === "price") ? "selected" : "" %>">گران ترین</a>
@@ -89,6 +89,7 @@
           <img src="img/brand6.png" />
         </div>
       </div>
-    </section> -->
+    -->
+    </section>
 
 <%- include('./includes/footer') -%>

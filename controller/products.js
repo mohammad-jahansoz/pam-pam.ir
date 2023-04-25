@@ -73,7 +73,7 @@ exports.searchProducts = async (req, res, next) => {
 
 exports.getProducts = async (req, res, next) => {
   const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 1;
+  const limit = parseInt(req.query.limit) || 12;
   const search = req.body.search || req.query.search || "";
   const category = req.params.category === "all" ? "" : req.params.category;
 
@@ -98,6 +98,7 @@ exports.getProducts = async (req, res, next) => {
       imageUrl: 1,
       name: 1,
       price: 1,
+      sale: 1,
       category: 1,
       count: 1,
       viewsSize: { $size: `$${sortBy}` },
