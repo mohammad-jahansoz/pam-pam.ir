@@ -47,6 +47,28 @@ header {
   padding: 20px 14%;
   transition: all 0.35s ease;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+.pagination .active {
+  color: #0d0f10;
+  background-color: var(--main-color);
+  font-weight: 700;
+}
+.pagination a {
+  text-align: center;
+  width: 40px;
+  padding: 5px 5px;
+  color: white;
+  border: 1px solid var(--main-color);
+  border-radius: 50%;
+  height: 40px;
+}
+
 .logo {
   font-size: 28px;
   font-weight: 700;
@@ -322,15 +344,15 @@ header.sticky {
   grid-template-columns: repeat(auto-fit, minmax(200px, auto));
   gap: 2rem;
 }
-.selected{
+.selected {
   color: var(--main-color) !important;
 }
-.sort{
+.sort {
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
-#sorting a{
+#sorting a {
   color: white;
 }
 .main-contact h3 {
