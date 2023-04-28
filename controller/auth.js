@@ -1,9 +1,7 @@
-const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
-const client = require("../startup/redis");
 
 const transporter = nodemailer.createTransport({
   host: process.env.NODEMAILER_HOST,
@@ -21,18 +19,16 @@ exports.postSignUp = async (req, res, next) => {
   if (findUser) {
     return res.status(400).send("you have account in our database . pls login");
   }
-
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
   const user = new User({ email: email, password: hash });
   await user.save();
-  const token = user.generateAuthToken();
-  res.header("x-auth-token", token).send(user);
+
+  req.session._id = user._id;
 };
 
 exports.postSignIn = async (req, res, next) => {
   const { email, password } = req.body;
-
   let user = await User.findOne({ email: email });
   if (!user) {
     return res
@@ -43,9 +39,8 @@ exports.postSignIn = async (req, res, next) => {
   if (!result) {
     return res.status(400).send("your password is incorrect ! try again");
   }
-  const token = user.generateAuthToken();
-  console.log(token);
-  res.header("x-auth-token", token).send(user);
+  req.session._id = user._id;
+  res.redirect("/");
 };
 
 exports.sendPasswordRecoveryEmail = async (req, res, next) => {
@@ -72,32 +67,32 @@ exports.verifyPasswordRecoveryEmail = async (req, res, next) => {
   res.send(user);
 };
 
-exports.setNewPassword = async (req, res, next) => {
-  const jwtToken = req.header("x-auth-token");
-  const { email, token } = req.params;
-  const { password } = req.body;
-  const user = await User.findOne({
-    email: email,
-    token: token,
-    expireToken: { $gt: new Date().getTime() },
-  });
-  if (user) {
-    const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(password, salt);
-    user.password = hash;
-    user.token = undefined;
-    user.expireToken = undefined;
-    try {
-      await client.set(user._id.toString(), jwtToken);
-    } catch (err) {
-      console.log(err);
-    }
-    await user.save();
-    res.send("password changed");
-  } else {
-    res.send("pls try again send password recovery requrist");
-  }
-};
+// exports.setNewPassword = async (req, res, next) => {
+//   const jwtToken = req.header("x-auth-token");
+//   const { email, token } = req.params;
+//   const { password } = req.body;
+//   const user = await User.findOne({
+//     email: email,
+//     token: token,
+//     expireToken: { $gt: new Date().getTime() },
+//   });
+//   if (user) {
+//     const salt = await bcrypt.genSalt(10);
+//     const hash = await bcrypt.hash(password, salt);
+//     user.password = hash;
+//     user.token = undefined;
+//     user.expireToken = undefined;
+//     try {
+//       await client.set(user._id.toString(), jwtToken);
+//     } catch (err) {
+//       console.log(err);
+//     }
+//     await user.save();
+//     res.send("password changed");
+//   } else {
+//     res.send("pls try again send password recovery requrist");
+//   }
+// };
 
 exports.getSignin = async (req, res, next) => {
   res.render("client/signin");

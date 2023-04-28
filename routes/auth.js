@@ -10,10 +10,10 @@ router.post(
   "/api/auth/resetPassword",
   authController.sendPasswordRecoveryEmail
 );
-router.put(
-  "/api/auth/resetPassword/:email/:token",
-  authController.setNewPassword
-);
+// router.put(
+//   "/api/auth/resetPassword/:email/:token",
+//   authController.setNewPassword
+// );
 router.get(
   "/api/auth/resetPassword/:email/:token",
   authController.verifyPasswordRecoveryEmail
