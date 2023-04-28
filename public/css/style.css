@@ -505,3 +505,9 @@ header.sticky {
 .sign-input::placeholder {
   color: var(--main-color);
 }
+
+.sign-input span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

@@ -102,3 +102,7 @@ exports.setNewPassword = async (req, res, next) => {
 exports.getSignin = async (req, res, next) => {
   res.render("client/signin");
 };
+
+exports.getSignup = (req, res, next) => {
+  res.render("client/signup");
+};
