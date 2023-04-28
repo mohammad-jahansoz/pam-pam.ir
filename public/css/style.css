@@ -474,3 +474,34 @@ header.sticky {
     left: 0;
   }
 }
+
+.sign-input {
+  max-width: 800px;
+  margin: 10rem auto;
+  border: 3px solid var(--main-color);
+  border-radius: 2rem;
+}
+
+.sign-input h3 {
+  text-align: center;
+  border-bottom: 3px solid var(--main-color);
+  border-radius: 1rem;
+}
+
+.sign-input div {
+  padding: 2rem;
+}
+
+.sign-input p a {
+  color: var(--main-color);
+}
+
+.sign-input form input {
+  border: 1px solid var(--main-color) !important;
+  border-radius: 2rem;
+  background-color: var(--bg-color);
+}
+
+.sign-input::placeholder {
+  color: var(--main-color);
+}
