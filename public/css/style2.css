@@ -213,7 +213,7 @@
   flex-basis: 25%;
   padding: 10px;
   min-width: 200px;
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
   transition: transform 0.5s;
 }
 
@@ -241,7 +241,6 @@
 }
 
 h4 {
-  color: #555;
   font-weight: normal;
 }
 
@@ -479,7 +478,7 @@ select:focus {
 /* single product details */
 
 .single-product {
-  margin-top: 80px;
+  margin-top: 7rem;
 }
 
 .single-product .col-2 img {
@@ -509,6 +508,7 @@ select:focus {
   font-size: 20px;
   margin-right: 10px;
   border: 1px solid #ff523b;
+  text-align: center;
 }
 
 input:focus {
@@ -698,4 +698,127 @@ form a {
   .cart-info p {
     display: none;
   }
+}
+
+.text-in-border {
+  margin-top: 3rem;
+  border: 1px solid var(--main-color);
+  border-radius: 20px;
+  margin-bottom: 3rem;
+}
+
+.text-in-border h2 {
+  margin-top: -30px;
+}
+.text-in-border h2 span {
+  background: var(--bg-color);
+  padding: 0 15px;
+  display: inline-block;
+}
+
+.like-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.like-container div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.like-container p {
+  font-weight: 700;
+}
+
+.comment-section-container {
+  padding: 20px 25px;
+}
+
+.comment-input-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  gap: 0.5rem;
+}
+
+.comment-input-container input {
+  background-color: #1e370c;
+  padding: 0.5rem;
+  width: 100%;
+  border: none;
+  color: white;
+  border-radius: 1rem;
+  margin: 0 !important;
+}
+
+.comment-input-container input::placeholder {
+  color: rgb(177, 177, 177);
+}
+
+.comment-text-container label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+.comment-text-container textarea {
+  color: white;
+  background-color: #1e370c;
+  resize: vertical;
+  border-radius: 1rem;
+  width: 100%;
+  padding: 0.5rem;
+  border: 0;
+}
+
+.comment-text-container textarea::placeholder {
+  color: rgb(177, 177, 177);
+}
+
+.comment-text-container textarea:focus {
+  box-shadow: 0 0 0 0.5rem 0.5rem var(--main-color);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.cm .cm-cm span {
+  border-bottom: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.cm .cm-cm {
+  border: 1px solid var(--main-color);
+  padding: 1rem;
+  border-radius: 1rem;
+  width: 100%;
+}
+
+.cm-reply {
+  width: 70%;
+  display: block;
+  border: 1px solid var(--main-color);
+  border-top: none;
+  padding: 1rem;
+  border-radius: 0 0 2rem 2rem;
+}
+
+.cm-reply p:first-child {
+  border-bottom: 1px solid;
 }

@@ -60,9 +60,7 @@ const ProductSchema = new Schema(
               default: new Date().toISOString(),
             },
           },
-          reply: {
-            reply: String,
-          },
+          reply: String,
         },
       ],
       default: [],

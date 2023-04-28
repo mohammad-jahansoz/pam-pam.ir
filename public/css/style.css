@@ -16,6 +16,7 @@
   list-style: none;
   text-decoration: none;
   scroll-behavior: smooth;
+  color: white;
 }
 :root {
   --bg-color: #0d0f10;

@@ -28,7 +28,10 @@
       </div>
     </div>
     <div class="col-2">
-      <p><%= product.category %></p>
+      <span class="like-container">
+        <p><%= product.category %></p>
+      </span>
+     
       <h1><%= product.name %></h1>
       <h4><%= product.price %> تومان</h4>
       <!-- <select>
@@ -52,41 +55,95 @@
 </div>
 
 <!-- title -->
-<div class="small-container" style="margin-top: 40px;">
-  <div class="">
-    <h2>محصولات مرتبط</h2>
-  </div>
-  <hr >
-</div>
 
+
+
+
+
+
+<div class="small-container text-in-border">
+  
+    <h2>
+      <span>
+        محصولات مرتبط
+      </span>
+    </h2>
+  
 <!-- products -->
-
-<div class="small-container">
+<!-- <div class="small-container"> -->
   <div class="row-sp">
     <% for(const relatedProduct of product.relatedProduct){ %>
-    <div class="col-4">
+    <a href="/api/product/getProduct/<%= relatedProduct._id %>" class="col-4">
       <img src="<%= relatedProduct.imageUrl[0] %>" alt="" />
       <h4><%= relatedProduct.name %></h4>
-      <div class="rating">
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="far fa-star"></i>
-        <i class="far fa-star"></i>
-        <i class="far fa-star"></i>
-      </div>
       <p><%= relatedProduct.price %> تومان</p>
+    </a>
+    <% } %>
+  </div>
+</div>
+  
+<!-- </div> -->
+<div class="small-container comment-section-container">
+
+<form class="" action="/api/product/comment/<%= product._id %>" method="POST" >
+  
+  <div
+    class="comment-text-container"
+  >
+    <label for="comment" >Your comment</label>
+    <textarea
+    name="comment"
+      id="comment"
+      rows="6"
+      class=" focus:outline-none"
+      placeholder="لطفا نظر خود را بنویسید..."
+      required
+    ></textarea>
+  </div>
+
+  <div class="comment-input-container">
+    <input
+      type="email"
+      name="email"
+      value=""
+      placeholder="ایمیل خود را وارد کنید"
+      class=""
+    />
+    <input
+    type="text"
+    name="name"
+    placeholder="نام خود را وارد کنید"
+    class="" />
+  </div>
+  <button
+    type="submit"
+    class="btn"
+  >
+    ارسال کامنت
+  </button>
+</form>
+
+<% for(const item of product.comments.reverse()){ %>
+
+  <div class="cm">
+    <div class="cm-cm">
+      <span >
+        <p><%= item.comment.name %></p>
+        <p><%= item.comment.createdAt.toLocaleString('fa-IR-u-nu-latn').split(',',1) %></p>
+      </span>
+      <p><%= item.comment.comment %></p>
+    </div>
+    <% if(item.reply){ %>
+    <div class="cm-reply">
+      <p>پاسخ ادمین👨🏻‍💻</p>
+      <p><%= item.reply %></p>
     </div>
     <% } %>
   </div>
-  <hr>
+  <%  } %>
+</div>
 </div>
 
-</div>
-
-
-
-
-<!-- js for product gallery -->
 
 <script>
   var ProductImg = document.getElementById('ProductImg');

@@ -47,23 +47,19 @@ exports.setComment = async (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(productId)) {
     return res.status(400).send("you send invalid id , pls try again");
   }
-  const product = await Product.findByIdAndUpdate(
-    productId,
-    {
-      $push: {
-        comments: {
-          comment: {
-            name: name,
-            email: email,
-            comment: comment,
-            createdAt: new Date().toISOString(),
-          },
+  await Product.findByIdAndUpdate(productId, {
+    $push: {
+      comments: {
+        comment: {
+          name: name,
+          email: email,
+          comment: comment,
+          createdAt: new Date().toISOString(),
         },
       },
     },
-    { new: true }
-  );
-  res.send(product.comments);
+  });
+  res.redirect(`/api/product/getProduct/${productId}`);
 };
 
 exports.searchProducts = async (req, res, next) => {

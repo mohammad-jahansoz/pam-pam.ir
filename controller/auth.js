@@ -98,3 +98,7 @@ exports.setNewPassword = async (req, res, next) => {
     res.send("pls try again send password recovery requrist");
   }
 };
+
+exports.getSignin = async (req, res, next) => {
+  res.render("client/signin");
+};

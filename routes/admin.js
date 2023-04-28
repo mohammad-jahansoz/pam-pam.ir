@@ -15,7 +15,7 @@ router.get(
 );
 router.put(
   "/api/product/comment/:productId/:commentId",
-  isAdmin,
+
   adminController.setReply
 );
 router.delete(
