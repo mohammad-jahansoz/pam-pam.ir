@@ -2,6 +2,7 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
+const logger = require("../startup/logger");
 
 const transporter = nodemailer.createTransport({
   host: process.env.NODEMAILER_HOST,
@@ -100,4 +101,9 @@ exports.getSignin = async (req, res, next) => {
 
 exports.getSignup = (req, res, next) => {
   res.render("client/signup");
+};
+
+exports.logout = (req, res, next) => {
+  req.session.destroy();
+  res.redirect("/");
 };

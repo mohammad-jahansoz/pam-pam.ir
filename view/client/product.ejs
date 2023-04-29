@@ -42,9 +42,12 @@
         <option>M</option>
         <option>S</option>
       </select> -->
-      <input type="number" value="1" min="1" />
-      <a href="" class="btn">افزودن به سبد خرید</a>
-
+      <form action="/api/product/addToCart" method="post">
+        <input type="hidden" name="productId" value="<%= product._id %>">
+        <input type="number" name="quantity" value="1" min="1" />
+        <label for="quantity"> تعداد </label>
+        <button type="submit" href="" class="btn">افزودن به سبد خرید</button>
+      </form>
       <h3>توضیحات <i class="fas fa-indent"></i></h3>
       <br />
       <p>

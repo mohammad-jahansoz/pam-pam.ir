@@ -14,7 +14,7 @@ router.get(
 router.get("/api/product/getCart", userController.getCart);
 router.put("/api/product/like/:id", productsController.setLike);
 router.post("/api/product/comment/:id", productsController.setComment);
-router.put("/api/product/addToCart", userController.addToCart);
+router.post("/api/product/addToCart", userController.addToCart);
 router.put("/api/product/setOrder", userController.setOrder);
 router.put("/api/product/verifyOrder", userController.verifyOrder);
 router.post("/api/product/search", productsController.searchProducts);

@@ -35,13 +35,16 @@ app.use(
 );
 
 app.use(checkUser);
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
 app.use(productsRoutes);
 app.use(authRoutes);
 app.use(error);
 
 app.get("/", async (req, res) => {
   const products = await Product.find().limit(4);
-  console.log(req.user);
   res.render("client/index", { products });
 });
 

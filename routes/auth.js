@@ -18,5 +18,6 @@ router.get(
   "/api/auth/resetPassword/:email/:token",
   authController.verifyPasswordRecoveryEmail
 );
+router.get("/api/auth/logout", authController.logout);
 // we dont need api for logout , this happen by front-end by delete x-auth-token in Header
 module.exports = router;

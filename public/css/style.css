@@ -93,7 +93,7 @@ header {
 }
 .header-icons i {
   font-size: 32px;
-  color: var(--text-color);
+  color: var(--main-color);
   margin-right: 20px;
   transition: all 0.36s ease;
 }
@@ -136,6 +136,16 @@ section {
   font-size: var(--normal-font);
   font-weight: 500;
   margin-bottom: 3rem;
+}
+
+.home-text {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home-text img {
+  width: 400px;
 }
 .btn {
   display: inline-block;
@@ -446,6 +456,9 @@ header.sticky {
 }
 
 @media (max-width: 670px) {
+  .home-text {
+    flex-direction: column-reverse;
+  }
   #menu-icon {
     display: block;
     cursor: pointer;
