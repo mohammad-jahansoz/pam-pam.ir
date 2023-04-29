@@ -939,3 +939,47 @@ form a {
   display: flex;
   gap: 1rem;
 }
+
+/* cart page */
+.cart-page {
+  margin: 150px auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-bottom: 1px solid var(--main-color);
+}
+.cart-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cart-page th {
+  text-align: right;
+  padding: 5px;
+  color: black;
+  background-color: var(--main-color);
+}
+.cart-page td {
+  padding: 10px 5px;
+}
+
+.cart-page td a {
+  font-size: 2rem;
+}
+.cart-page td a:hover i {
+  color: red;
+}
+
+.cart-page td img {
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
+}
+
+.cart-page div {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}

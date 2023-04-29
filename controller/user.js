@@ -22,10 +22,11 @@ exports.addToCart = async (req, res, next) => {
 exports.getCart = async (req, res, next) => {
   const userWithProductsInCart = await req.user.populate(
     "cart.productId",
-    "-relatedProduct -category -likes -comments -createdAt -updatedAt -__v"
+    "-relatedProduct -category -views -likes -comments -createdAt -updatedAt -__v"
   );
-  console.log(userWithProductsInCart);
-  res.send(userWithProductsInCart);
+  // console.log(userWithProductsInCart);
+  // res.send(userWithProductsInCart);
+  res.render("client/cart", { cart: userWithProductsInCart.cart });
 };
 
 exports.setOrder = async (req, res, next) => {
@@ -113,14 +114,13 @@ exports.verifyOrder = async (req, res, next) => {
 };
 
 exports.deleteCartItem = async (req, res, next) => {
-  const productId = req.body.productId;
-  const user = await User.findByIdAndUpdate(
+  const productId = req.params.productId;
+  await User.findByIdAndUpdate(
     req.user._id,
     {
       $pull: { cart: { productId: productId } },
     },
     { new: true }
   );
-  console.log(user);
-  res.send(user);
+  res.redirect("/api/product/getcart");
 };

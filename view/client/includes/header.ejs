@@ -17,14 +17,14 @@
     
     <div class="bx bx-menu" id="menu-icon"></div>
     <% if(user){ %>
-      <a href="#"><i class="bx bx-shopping-bag"></i></a>
+      <a href="/api/product/getCart"><i class="bx bx-shopping-bag"></i></a>
     <div class="dropdown">
       <input class="dropdown-toggle" type="text">
       <div class="dropdown-text">
        مدیریت اکانت
     </div>
       <ul class="dropdown-content">
-        <li><a href="">سبد خرید</a></li>
+        <li><a href="/api/product/getCart">سبد خرید</a></li>
         <li><a href="#">خرید های قدیم</a></li>
         <li><a href="/api/auth/logout">خروج از اکانت</a></li>
       </ul>

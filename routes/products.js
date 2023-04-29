@@ -19,6 +19,9 @@ router.put("/api/product/setOrder", userController.setOrder);
 router.put("/api/product/verifyOrder", userController.verifyOrder);
 router.post("/api/product/search", productsController.searchProducts);
 router.get("/api/product/getProduct/:id", productsController.getProduct);
-router.put("/api/product/deleteCartItem", userController.deleteCartItem);
+router.get(
+  "/api/product/deleteCartItem/:productId",
+  userController.deleteCartItem
+);
 
 module.exports = router;
