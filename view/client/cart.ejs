@@ -17,10 +17,10 @@
   <% for(const item of cart){ %>
   <tr>
     <td>
-      <span class="cart-info">
+      <a href="/api/product/getProduct/<%= item.productId._id %>" class="cart-info">
         <img src="<%= item.productId.imageUrl %>" alt="">
         <p><%= item.productId.name %></p>
-      </span>
+      </a>
     </td>
     <td><%= item.productId.price %> * <%= item.quantity %></td>
     <td><%= item.productId.price * item.quantity %></td>
@@ -38,7 +38,7 @@
   <h4>هزینه ارسال : 35000</h4>
   <h4>هزینه نهایی : <%= totalPrice + 35000 %></h4>
 </span>
-  <button class="btn">ادامه فرایند خرید</button>
+  <a href="/api/user/getOrderForm" class="btn">ادامه فرایند خرید</a>
 </div>
 </div>
 

@@ -9,7 +9,7 @@ const orderSchema = new mongoose.Schema(
         required: true,
         type: String,
       },
-      cellPhone: {
+      phoneNumber: {
         required: true,
         type: Number,
       },
@@ -19,21 +19,19 @@ const orderSchema = new mongoose.Schema(
         address: String,
         postCode: String,
       },
-      // userId: {
-      //   type: mongoose.Schema.Types.ObjectId,
-      //   required: true,
-      //   ref: "User",
-      // },
     },
     products: [{}],
     status: {
       type: Number,
       default: 1,
     },
+    note: String,
     paymentInfo: {
       date: Date,
+      totalPrice: Number,
       shopTrackingCode: Number,
       postTrackingCode: Number,
+      referenceId: String,
     },
   },
   { timestamps: true }

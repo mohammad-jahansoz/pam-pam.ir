@@ -953,6 +953,7 @@ table {
   display: flex;
   align-items: center;
   gap: 1rem;
+  font-size: 1rem !important;
 }
 
 .cart-page th {
@@ -982,4 +983,23 @@ table {
   display: flex;
   align-items: center;
   justify-content: space-around;
+}
+
+/* order Form */
+
+.order-form {
+  margin-top: 8rem;
+  margin-bottom: 8rem;
+}
+
+.order-form form input {
+  background-color: black;
+  border: 1px solid var(--main-color);
+  border-radius: 1rem;
+}
+
+.order-form span {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
