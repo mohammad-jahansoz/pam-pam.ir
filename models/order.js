@@ -43,6 +43,7 @@ const orderSchema = new mongoose.Schema(
       shopTrackingCode: Number,
       postTrackingCode: Number,
       referenceId: String,
+      bankTrackingCode:String
     },
   },
   { timestamps: true }

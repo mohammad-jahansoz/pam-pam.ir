@@ -27,8 +27,8 @@ app.use(
     secret: process.env.SESSION_SECRET,
     store: MongoStore.create({
       mongoUrl: "mongodb://127.0.0.1:27017/pam-pam",
-      resave: false,
-      saveUninitialized: false,
+      // resave: false,
+      // saveUninitialized: false,
       ttl: 60 * 60 * 24 * 365,
     }),
   })
