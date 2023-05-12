@@ -41,7 +41,7 @@ exports.getCart = async (req, res, next) => {
 exports.setOrder = async (req, res, next) => {
   const userWithProductsInCart = await req.user.populate(
     "cart.productId",
-    "-relatedProduct -category -views -likes -comments -createdAt -updatedAt -__v -imageUrl"
+    "-relatedProduct -category -views -likes -comments -createdAt -updatedAt -__v  -count"
   );
 
   let totalPrice = 35000;
@@ -77,7 +77,7 @@ exports.setOrder = async (req, res, next) => {
       },
     },
     note: req.body.note,
-    products: userWithProductsInCart,
+    products: userWithProductsInCart.cart,
     paymentInfo: {
       totalPrice: totalPrice,
       shopTrackingCode: shopTrackingCode,
@@ -86,6 +86,7 @@ exports.setOrder = async (req, res, next) => {
   });
 
   await order.save();
+  console.log(order.products);
   res.send(
     `<html>
       <body>

@@ -20,7 +20,18 @@ const orderSchema = new mongoose.Schema(
         postCode: String,
       },
     },
-    products: [{}],
+    products: [
+      {
+        productId: {
+          _id: mongoose.Schema.Types.ObjectId,
+          name: String,
+          imageUrl: [],
+          price: Number,
+        },
+        quantity: Number,
+        _id: false,
+      },
+    ],
     status: {
       type: Number,
       default: 1,
