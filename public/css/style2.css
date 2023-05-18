@@ -548,7 +548,7 @@ table {
 }
 
 th {
-  text-align: left;
+  text-align: right;
   padding: 5px;
   color: #ffffff;
   background: #ff523b;
@@ -947,7 +947,7 @@ form a {
 table {
   width: 100%;
   border-collapse: collapse;
-  border-bottom: 1px solid var(--main-color);
+ 
 }
 .cart-info {
   display: flex;

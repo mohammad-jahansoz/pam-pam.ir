@@ -5,7 +5,7 @@ const nodemailer = require("nodemailer");
 
 const zarinpal_checkout = require('zarinpal-checkout');
 
-const zarinpal = zarinpal_checkout.create("d9d88b03-3514-490a-b6f4-a864a44e0d39",false)
+const zarinpal = zarinpal_checkout.create("d9d88b03-3514-490a-b6f4-a864a44e0d39",true)
 
 
 
@@ -41,8 +41,6 @@ exports.getCart = async (req, res, next) => {
     "cart.productId",
     "-relatedProduct -category -views -likes -comments -createdAt -updatedAt -__v"
   );
-  // console.log(userWithProductsInCart);
-  // res.send(userWithProductsInCart);
   res.render("client/cart", { cart: userWithProductsInCart.cart });
 };
 
@@ -52,7 +50,7 @@ exports.setOrder = async (req, res, next) => {
     "-relatedProduct -category -views -likes -comments -createdAt -updatedAt -__v -imageUrl"
   );
 
-  let totalPrice = 35000;
+  let totalPrice = 3500;
   for (const product of userWithProductsInCart.cart) {
     totalPrice += product.quantity * product.productId.price;
   }
@@ -114,12 +112,14 @@ exports.verifyOrder = async (req, res, next) => {
     );
     if(receipt.status === 100 || receipt.status === 101){
       console.log(receipt);
-      res.send(receipt);
       order.status = 2 ;
-  order.paymentInfo.bankTrackingCode = receipt.RefID;
-  order.save()
+      order.paymentInfo.bankTrackingCode = receipt.RefID;
+      order.save()
+      res.render('client/receipt',{order,receipt})
+      console.log(receipt)
     }else{
-     return res.send('پرداخت ناموفق')
+      console.log(receipt)
+     return res.render('client/receipt',{order,receipt})
     }
   } catch (err) {
     console.log(err);
@@ -141,3 +141,10 @@ exports.verifyOrder = async (req, res, next) => {
 exports.getOrderForm = (req, res, next) => {
   res.render("client/orderForm");
 };
+
+
+exports.designOrder = (req,res,next)=>{
+  res.render('client/receipt')
+}
+
+
