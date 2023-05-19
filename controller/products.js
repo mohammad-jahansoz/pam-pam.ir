@@ -10,7 +10,7 @@ exports.getProduct = async (req, res, next) => {
     "relatedProduct",
     "name price _id imageUrl"
   );
-  console.log(product);
+
   if (!product)
     return res.status(404).send(`we havent any product with ${productId} id`);
   res.render("client/product", { product });
