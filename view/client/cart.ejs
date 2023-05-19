@@ -18,7 +18,7 @@
   <tr>
     <td>
       <a href="/api/product/getProduct/<%= item.productId._id %>" class="cart-info">
-        <img src="<%= item.productId.imageUrl %>" alt="">
+        <img src="<%= item.productId.imageUrl[0] %>" alt="">
         <p><%= item.productId.name %></p>
       </a>
     </td>

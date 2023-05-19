@@ -30,7 +30,7 @@
   <div class="new-content">
     <% for(const product of products){ %>
     <div class="box">
-      <img src="<%= product.imageUrl %>" />
+      <img src="<%= product.imageUrl[0] %>" />
       <h5><%= product.name %></h5>
       <h6><%= product.price %> تومان</h6>
       <% if(product.sale){ %>

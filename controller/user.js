@@ -48,7 +48,7 @@ exports.getCart = async (req, res, next) => {
 exports.setOrder = async (req, res, next) => {
   const userWithProductsInCart = await req.user.populate(
     "cart.productId",
-    "-relatedProduct -category -views -likes -comments -createdAt -updatedAt -__v -imageUrl"
+    "-relatedProduct -category -views -likes -comments -createdAt -updatedAt -__v "
   );
 
   let totalPrice = 35000;

@@ -25,7 +25,7 @@ const orderSchema = new mongoose.Schema(
         productId: {
           _id: mongoose.Schema.Types.ObjectId,
           name: String,
-          imageUrl: [],
+          imageUrl: [String],
           price: Number,
         },
         quantity: Number,
@@ -43,7 +43,7 @@ const orderSchema = new mongoose.Schema(
       shopTrackingCode: Number,
       postTrackingCode: Number,
       referenceId: String,
-      bankTrackingCode:String
+      bankTrackingCode: String,
     },
   },
   { timestamps: true }

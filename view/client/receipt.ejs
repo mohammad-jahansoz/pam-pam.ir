@@ -30,30 +30,23 @@
           قیمت کل
         </th>
       </tr>
-      <tr>
-        <td>
-          <a href="\" class="cart-info">
-            <img src="https://assets.epicurious.com/photos/594d4bf91c09de5a33466508/16:9/w_1280,c_limit/Dehydrated-Fruit-HERO-21062017.jpg" alt="">
-            <p>پک 13 میوه 1 کیلویی</p>
-          </a>
-        </td>
-        <td>210000 * 2</td>
-        <td>420000</td>
+      
+        <% for(const product of order.products) { %>
         
-      </tr>
       <tr>
         <td>
           <a href="\" class="cart-info">
-            <img src="https://assets.epicurious.com/photos/594d4bf91c09de5a33466508/16:9/w_1280,c_limit/Dehydrated-Fruit-HERO-21062017.jpg" alt="">
-            <p>پک 13 میوه 1 کیلویی</p>
+            <img src="<%= product.productId.imageUrl[0] %>" alt="">
+            <p><%= product.productId.name %></p>
           </a>
         </td>
-        <td>210000 * 2</td>
-        <td>420000</td>
+        <td><%= product.productId.price %> * <%= product.quantity %></td>
+        <td><%= product.productId.price * product.quantity %></td>
         
       </tr>
       
-    
+    <%   } %>
+
     </table>
     <div style="justify-content: space-between !important; padding: 1rem; border-bottom: 1px solid <%- (receipt.status === 100 || receipt.status === 101) ? "green" : "red" %>; border-top: 1px solid <%- (receipt.status === 100 || receipt.status === 101) ? "green" : "red" %>;">
     <span>
