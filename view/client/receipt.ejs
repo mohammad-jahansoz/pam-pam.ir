@@ -3,14 +3,14 @@
 
 
 <div class="small-container" style="margin-top: 8rem; margin-bottom: 8rem; ">
-  <h2 style="color: <%- (receipt.status === 100 || receipt.status === 101) ? "green" : "red" %>;margin: auto; width: 10rem; text-align: center; background-color: darkgrey; padding: 0.7rem; border: 2px solid <%- (receipt.status === 100 || receipt.status === 101) ? "green" : "red" %>;font-size: 1rem; border-radius: 2rem 2rem 0 0; border-bottom:0"><%- (receipt.status === 100 || receipt.status === 101) ? "پرداخت موفق" : "پرداخت ناموفق" %></h2>
-  <div style="border: 2px solid <%- (receipt.status === 100 || receipt.status === 101) ? "green" : "red" %> ;border-radius: 2rem;">
+  <h2 style="color: <%- (receipt.status === 100 || receipt.status === 101) ? "green" : "red" %>;margin: auto; width: 10rem; text-align: center; background-color: black; padding: 0.7rem; border: 2px solid <%- (receipt.status === 100 || receipt.status === 101) ? "green" : "red" %>;font-size: 1rem; border-radius: 2rem 2rem 0 0; border-bottom:0"><%- (receipt.status === 100 || receipt.status === 101) ? "پرداخت موفق" : "پرداخت ناموفق" %></h2>
+  <div style=" background-color: black; border: 2px solid <%- (receipt.status === 100 || receipt.status === 101) ? "green" : "red" %> ;border-radius: 2rem;">
   <ul style="display: flex;padding: 1rem; align-items: center; justify-content: space-between; text-align: center;">
     <li>
-      تاریخ : <%= order.createdAt.toLocaleString('fa-IR-u-nu-latn').split(',',1) %>
+      تاریخ : <%= order.createdAt.toLocaleString("fa").toLocaleString('fa-IR-u-nu-latn').split(',',1) %>
     </li>
     <li >
-کد رهگیری : <%= order.paymentInfo.shopTrackingCode %>
+کد رهگیری : <%- order.paymentInfo.shopTrackingCode.toString().substring(3, 6) %> - <%- order.paymentInfo.shopTrackingCode.toString().substring(0,3) %>
     </li>
 <li style="color: <%- (receipt.status === 100 || receipt.status === 101) ? "" : "red" %>;">
 شناسه پراخت : <%- (receipt.status === 100 || receipt.status === 101) ? order.paymentInfo.bankTrackingCode : "ناموفق" %> 
@@ -35,7 +35,7 @@
         
       <tr>
         <td>
-          <a href="\" class="cart-info">
+          <a href="/api/product/getProduct/<%= product.productId._id %>" class="cart-info">
             <img src="<%= product.productId.imageUrl[0] %>" alt="">
             <p><%= product.productId.name %></p>
           </a>
@@ -48,16 +48,26 @@
     <%   } %>
 
     </table>
-    <div style="justify-content: space-between !important; padding: 1rem; border-bottom: 1px solid <%- (receipt.status === 100 || receipt.status === 101) ? "green" : "red" %>; border-top: 1px solid <%- (receipt.status === 100 || receipt.status === 101) ? "green" : "red" %>;">
+    <div style="justify-content: space-between !important; padding: 1rem; border-top: 1px solid <%- (receipt.status === 100 || receipt.status === 101) ? "green" : "red" %>;">
     <span>
-      <h4>جمع قیمت محصولات  : 420000</h4>
+      <h4>جمع قیمت محصولات  : <%- order.paymentInfo.totalPrice - 35000 %></h4>
       <h4>هزینه ارسال : 35000</h4>
-      <h4>هزینه نهایی : 455000</h4>
+      <h4>هزینه نهایی : <%- order.paymentInfo.totalPrice.toLocaleString("fa") %></h4>
     </span>
     <span style="display: flex; flex-direction: column; align-items: center; text-align: center;">
       <img src="/images/logo-white.png" alt="" style="width: 12rem; ">
       <h4>فروشگاه اینترنتی پَم پَم</h4>
     </span>
+
+    
+    </div>
+
+    <div style="display: block;
+    padding: 1rem;
+    border-bottom: 1px solid <%- (receipt.status === 100 || receipt.status === 101) ? "green" : "red" %>;" >
+      <p>گیرنده : <%= order.user.name %></p>
+      <p>شماره تماس : <%= order.user.phoneNumber %></p>
+      <p>آدرس : <%- order.user.address.province + "-" + order.user.address.city + "-" + order.user.address.address  + "." + "      ک.پ        " + order.user.address.postCode %> </p>
     </div>
 
     <div style="padding: 0.5rem; font-size: 14px;">
