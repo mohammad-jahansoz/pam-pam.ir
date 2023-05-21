@@ -1,54 +1,94 @@
  <!----contact--->
  <section class="contact" id="contact">
-  <div class="main-contact">
-    <h3>مارو دنبال کنید</h3>
-    <h5>صفحات فروشگاه ما در فضای مجازی</h5>
-    <div class="icons">
-      <a href="#"><i class="bx bxl-facebook-square"></i></a>
-      <a href="#"><i class="bx bxl-instagram-alt"></i></a>
-      <a href="#"><i class="bx bxl-twitter"></i></a>
-    </div>
-  </div>
+   <div class="main-contact">
+     <h3>مارو دنبال کنید</h3>
+     <h5>صفحات فروشگاه ما در فضای مجازی</h5>
+     <div class="icons">
+       <a href="#"><i class="bx bxl-facebook-square"></i></a>
+       <a href="#"><i class="bx bxl-instagram-alt"></i></a>
+       <a href="#"><i class="bx bxl-twitter"></i></a>
+     </div>
+   </div>
 
-  <div class="main-contact">
-    <h3>دسترسی سریع</h3>
-    <li><a href="#home">خانه</a></li>
-    <li><a href="#featured">دسته بندی</a></li>
-    <li><a href="#new">بلاگ</a></li>
-    <li><a href="#contact">تماس با ما</a></li>
-  </div>
+   <div class="main-contact">
+     <h3>دسترسی سریع</h3>
+     <li><a href="#home">خانه</a></li>
+     <li><a href="#featured">دسته بندی</a></li>
+     <li><a href="#new">بلاگ</a></li>
+     <li><a href="#contact">تماس با ما</a></li>
+   </div>
 
-  <div class="main-contact">
-    <h3>خدمات</h3>
-    <li><a href="#">فروشگاه اینترنتی</a></li>
-    <li><a href="#">خرید عمده ( همکاری)</a></li>
-    <li><a href="#">بلاگ آموزشی</a></li>
-  </div>
+   <div class="main-contact">
+     <h3>خدمات</h3>
+     <li><a href="#">فروشگاه اینترنتی</a></li>
+     <li><a href="#">خرید عمده ( همکاری)</a></li>
+     <li><a href="#">بلاگ آموزشی</a></li>
+   </div>
 
-  <div class="main-contact">
-    <h3>دسته بندی</h3>
-    <li><a href="/api/product/getProducts/میوه خشک">میوه خشک</a></li>
-    <li><a href="/api/product/getProducts/چای میوه ای و دمنوش"">چای میوه ای و دمنوش </a></li>
-    <li><a href="/api/product/getProducts/ادویه">ادویه</a></li>
-    <li><a href="/api/product/getProducts/لواشک و ترشی">لواشک و ترشی</a></li>
-    <li><a href="/api/product/getProducts/پک">پک کادویی</a></li>
-    <li><a href="/api/product/getProducts/میوه خشک منجمد">میوه خشک منجمد</a></li>
-  </div>
-</section>
+   <div class="main-contact">
+     <h3>دسته بندی</h3>
+     <li><a href="/api/product/getProducts/میوه خشک">میوه خشک</a></li>
+     <li><a href="/api/product/getProducts/چای میوه ای و دمنوش"">چای میوه ای و دمنوش </a></li>
+    <li><a href=" /api/product/getProducts/ادویه">ادویه</a></li>
+     <li><a href="/api/product/getProducts/لواشک و ترشی">لواشک و ترشی</a></li>
+     <li><a href="/api/product/getProducts/پک">پک کادویی</a></li>
+     <li><a href="/api/product/getProducts/میوه خشک منجمد">میوه خشک منجمد</a></li>
+   </div>
+ </section>
 
-<div class="last-text">
-  <p>
-    Copyright © 2023 All rights reserved | This website Created By
-    <a href="#">Mohammad Jahansoz</a>
-  </p>
-</div>
+ <div class="last-text">
+   <p>
+     Copyright © 2023 All rights reserved | This website Created By
+     <a href="#">Mohammad Jahansoz</a>
+   </p>
+ </div>
 
-<!----scroll top--->
-<a href="#" class="top"><i class="bx bx-up-arrow-alt"></i></a>
+ <!----scroll top--->
+ <a href="#" class="top"><i class="bx bx-up-arrow-alt"></i></a>
 
-<!-- <script src="https://unpkg.com/scrollreveal"></script> -->
 
-<!----custom js link--->
-<script src="/js/script.js"></script>
-</body>
-</html>
+ <!--  -->
+
+ <div class="tab-nav-container">
+   <a href="/" class="tab active ">
+     <i class='bx bx-home'></i>
+     <p>خانه</p>
+   </a>
+   <a href="/api/product/getCart" class="tab">
+     <i class="bx bx-cart-alt"></i>
+     <p>سبد خرید</p>
+   </a>
+   <a href="/api/user/getOrders" class="tab">
+     <i class='bx bx-list-ol'></i>
+     <p>لیست خرید</p>
+   </a>
+   <a href="#" class="tab">
+     <i class='bx bx-search'></i>
+     <p>جستجو</p>
+   </a>
+ </div>
+
+ <!--  -->
+
+ <script src="/js/script.js"></script>
+ <script>
+   const tabs = document.querySelectorAll(".tab");
+
+   tabs.forEach((clickedTab) => {
+     // Add onClick event listener on each tab
+     clickedTab.addEventListener("click", () => {
+       // Remove the active class from all the tabs (this acts as a "hard" reset)
+       tabs.forEach((tab) => {
+         tab.classList.remove("active");
+         tab.firstElementChild.classList.remove("bx-flashing")
+       });
+       // Add the active class on the clicked tab
+       clickedTab.classList.add("active")
+       tab.firstElementChild.classList.add("bx-flashing")
+
+     });
+   });
+ </script>
+ </body>
+
+ </html>

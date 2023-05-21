@@ -440,7 +440,7 @@ header.sticky {
   border-radius: 2rem;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   header {
     padding: 7px 4%;
     transition: 0.2s;
@@ -455,7 +455,16 @@ header.sticky {
   }
 }
 
+@media (min-width: 670px) {
+  .tab-nav-container {
+    display: none !important;
+  }
+}
+
 @media (max-width: 670px) {
+  .search-container {
+    display: none !important;
+  }
   .home-text {
     flex-direction: column-reverse;
   }
@@ -463,8 +472,15 @@ header.sticky {
     display: block;
     cursor: pointer;
   }
+  .desktop {
+    display: none !important;
+  }
+
   .header-icons {
     display: inline-flex;
+  }
+  .dropdown {
+    display: none !important;
   }
   .navlist {
     position: absolute;

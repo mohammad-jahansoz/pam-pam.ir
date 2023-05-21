@@ -90,7 +90,7 @@
   background: var(--main-color);
   /* color: white; */
   text-shadow: 0 0 10px black;
-  padding: 0 20px 0 80px;
+  /* padding: 0 20px 0 80px; */
   border-radius: 30px;
   box-shadow: 0 0 25px 0 var(--main-color), 0 20px 25px 0 rgba(0, 0, 0, 0.2);
   transition: all 1s;
@@ -103,13 +103,16 @@
   cursor: pointer;
 }
 .container input:focus {
-  width: 300px;
+  /* width: 300px; */
+  width: 230px;
+
   opacity: 1;
   cursor: text;
 }
 .container input:focus ~ .search {
   /* right: -250px; */
-  right: 250px;
+  right: 170px;
+  /* right: 250px; */
   background: #151515;
   z-index: 6;
 }
@@ -1010,6 +1013,9 @@ table {
 }
 
 @media (max-width: 900px) {
+  .navlist a {
+    padding: 10px !important;
+  }
   .orders-parent-container {
     grid-template-columns: 1fr !important;
   }
@@ -1029,5 +1035,74 @@ table {
   .orders-container div ul li {
     display: flex;
     flex-direction: column;
+  }
+}
+
+/*  */
+
+.tab-nav-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.842);
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
+  /* box-shadow: 0 3px 6px rgba(255, 0, 0, 0.16), 0 3px 6px rgb(255, 0, 0); */
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+  border-top: 2px solid var(--main-color);
+}
+
+.tab {
+  border: 2px solid var(--main-color);
+  background-color: black;
+  border-radius: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  margin: 0 10px;
+  transition: background 0.4s linear;
+  height: 50px;
+  min-width: 50px;
+}
+
+.tab i {
+  font-size: 1.7em;
+}
+
+.tab p {
+  font-weight: bold;
+  overflow: hidden;
+  max-width: 0;
+}
+
+.tab.active p {
+  margin-left: 10px;
+  max-width: 200px;
+  transition: max-width 0.4s linear;
+}
+
+.tab.active {
+  background-color: var(--main-color);
+  color: rgba(91, 55, 183, 1);
+}
+
+@media (max-width: 450px) {
+  .tab-nav-container {
+    padding: 20px;
+  }
+
+  .tab {
+    padding: 0 10px;
+    margin: 0;
+    height: 50px;
+    min-width: 50px;
+  }
+
+  .tab i {
+    font-size: 1.4em;
   }
 }
