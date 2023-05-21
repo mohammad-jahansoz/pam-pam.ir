@@ -14,7 +14,7 @@
 <!----new--->
 <section class="new" id="new">
   <div id="sorting" class="center-text">
-    <% if(!search) { %> 
+    <% if(!search) { %>
     <h2><%= (category !== "") ? `تمام محصولات ${category}` : "تمام محصولات" %></h2>
     <% }else{ %>
     <h2><%= `نتیجه جستجو ${search} : ${pagination.totalProducts} محصول` %></h2>
@@ -44,26 +44,26 @@
   </div>
 
   <section class="pagination">
-  <% if(pagination.page !== 1) { %>
+    <% if(pagination.page !== 1) { %>
     <a href="?search=<%= search %>&sort=<%= sortBy %>&page=1">1</a>
     <% } %>
     <% if(pagination.hasPrevPage && pagination.page !== 1 && pagination.page !== 2){ %>
-      <a href="?search=<%= search %>&sort=<%= sortBy %>&page=<%= pagination.prevPage %>"><%= pagination.prevPage %></a>
-      <% } %>
-     
-        <a class="active" href="?search=<%= search %>&?sort=<%= sortBy %>&page=<%= pagination.page %>"><%= pagination.page %></a>
-        
-        <% if(pagination.hasNextPage && pagination.nextPage !== pagination.totalPages){ %>
-          <a href="?search=<%= search %>&sort=<%= sortBy %>&page=<%= pagination.nextPage %>"><%= pagination.nextPage %></a>
-          <% } %>
-          <% if(pagination.totalPages !== 1 && pagination.page !== pagination.totalPages){ %>
-            <a href="?search=<%= search %>&sort=<%= sortBy %>&page=<%= pagination.totalPages  %>"><%= pagination.totalPages  %></a>
-            <% } %>
-            
-          </section>
-          
-<!----brand--->
-<!-- <section class="brand">
+    <a href="?search=<%= search %>&sort=<%= sortBy %>&page=<%= pagination.prevPage %>"><%= pagination.prevPage %></a>
+    <% } %>
+
+    <a class="active" href="?search=<%= search %>&?sort=<%= sortBy %>&page=<%= pagination.page %>"><%= pagination.page %></a>
+
+    <% if(pagination.hasNextPage && pagination.nextPage !== pagination.totalPages){ %>
+    <a href="?search=<%= search %>&sort=<%= sortBy %>&page=<%= pagination.nextPage %>"><%= pagination.nextPage %></a>
+    <% } %>
+    <% if(pagination.totalPages !== 1 && pagination.page !== pagination.totalPages){ %>
+    <a href="?search=<%= search %>&sort=<%= sortBy %>&page=<%= pagination.totalPages  %>"><%= pagination.totalPages  %></a>
+    <% } %>
+
+  </section>
+
+  <!----brand--->
+  <!-- <section class="brand">
       <div class="brand-content">
         <div class="main">
           <img src="img/brand1.png" />
@@ -90,6 +90,6 @@
         </div>
       </div>
     -->
-    </section>
+</section>
 
 <%- include('./includes/footer') -%>

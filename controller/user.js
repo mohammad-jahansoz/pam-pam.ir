@@ -142,3 +142,12 @@ exports.getOrderForm = (req, res, next) => {
 exports.designOrder = (req, res, next) => {
   res.render("client/receipt");
 };
+
+exports.getOrders = async (req, res, next) => {
+  const userWithOrders = await req.user.populate({
+    path: "order",
+    options: { sort: { createdAt: -1 } },
+  });
+
+  res.render("client/getOrders", { orders: userWithOrders.order });
+};

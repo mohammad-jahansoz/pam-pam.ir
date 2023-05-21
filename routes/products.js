@@ -25,5 +25,6 @@ router.get(
 );
 router.get("/api/user/getOrderForm", userController.getOrderForm);
 router.post("/api/user/orderForm", userController.setOrder);
+router.get("/api/user/getOrders", userController.getOrders);
 
 module.exports = router;

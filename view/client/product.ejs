@@ -7,34 +7,34 @@
 <div>
 
 
-<div class="small-container single-product">
-  <div class="row-sp">
-    <div class="col-2">
-      <img src="<%= product.imageUrl[0] %>" alt="" width="100%" id="ProductImg" />
+  <div class="small-container single-product">
+    <div class="row-sp">
+      <div class="col-2">
+        <img src="<%= product.imageUrl[0] %>" alt="" width="100%" id="ProductImg" />
 
-      <div class="small-img-row">
-        <div class="small-img-col">
-          <img src="<%= product.imageUrl[0] %>" alt="" width="100%" class="small-img" />
-        </div>
-        <div class="small-img-col">
-          <img src="<%= product.imageUrl[1] %>" alt="" width="100%" class="small-img" />
-        </div>
-        <div class="small-img-col">
-          <img src="<%= product.imageUrl[2] %>" alt="" width="100%" class="small-img" />
-        </div>
-        <div class="small-img-col">
-          <img src="<%= product.imageUrl[3] %>" alt="" width="100%" class="small-img" />
+        <div class="small-img-row">
+          <div class="small-img-col">
+            <img src="<%= product.imageUrl[0] %>" alt="" width="100%" class="small-img" />
+          </div>
+          <div class="small-img-col">
+            <img src="<%= product.imageUrl[1] %>" alt="" width="100%" class="small-img" />
+          </div>
+          <div class="small-img-col">
+            <img src="<%= product.imageUrl[2] %>" alt="" width="100%" class="small-img" />
+          </div>
+          <div class="small-img-col">
+            <img src="<%= product.imageUrl[3] %>" alt="" width="100%" class="small-img" />
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-2">
-      <span class="like-container">
-        <p><%= product.category %></p>
-      </span>
-     
-      <h1><%= product.name %></h1>
-      <h4><%= product.price %> تومان</h4>
-      <!-- <select>
+      <div class="col-2">
+        <span class="like-container">
+          <p><%= product.category %></p>
+        </span>
+
+        <h1><%= product.name %></h1>
+        <h4><%= product.price %> تومان</h4>
+        <!-- <select>
         <option>Select Size</option>
         <option>XXL</option>
         <option>XL</option>
@@ -42,109 +42,86 @@
         <option>M</option>
         <option>S</option>
       </select> -->
-      <form action="/api/product/addToCart" method="post">
-        <input type="hidden" name="productId" value="<%= product._id %>">
-        <input type="number" name="quantity" value="1" min="1" />
-        <label for="quantity"> تعداد </label>
-        <button type="submit" href="" class="btn">افزودن به سبد خرید</button>
-      </form>
-      <h3>توضیحات <i class="fas fa-indent"></i></h3>
-      <br />
-      <p>
-        میوه خشک موز یکی از بهترین و خوشمزه ترین میوه هاییه که شما میتونید تهیه کنید و بخورید و بخاطر خواص زیاد و خوشمزگیش خیلی پرطرفداره و تمام مشتری های ما حتما حداقل یک بار ازش خریدن
-      </p>
+        <form action="/api/product/addToCart" method="post">
+          <input type="hidden" name="productId" value="<%= product._id %>">
+          <input type="number" name="quantity" value="1" min="1" />
+          <label for="quantity"> تعداد </label>
+          <button type="submit" href="" class="btn">افزودن به سبد خرید</button>
+        </form>
+        <h3>توضیحات <i class="fas fa-indent"></i></h3>
+        <br />
+        <p>
+          میوه خشک موز یکی از بهترین و خوشمزه ترین میوه هاییه که شما میتونید تهیه کنید و بخورید و بخاطر خواص زیاد و خوشمزگیش خیلی پرطرفداره و تمام مشتری های ما حتما حداقل یک بار ازش خریدن
+        </p>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- title -->
-
+  <!-- title -->
 
 
 
 
 
-<div class="small-container text-in-border">
-  
+  <div class="small-container text-in-border">
+
     <h2>
       <span>
         محصولات مرتبط
       </span>
     </h2>
-  
-<!-- products -->
-<!-- <div class="small-container"> -->
-  <div class="row-sp">
-    <% for(const relatedProduct of product.relatedProduct){ %>
-    <a href="/api/product/getProduct/<%= relatedProduct._id %>" class="col-4">
-      <img src="<%= relatedProduct.imageUrl[0] %>" alt="" />
-      <h4><%= relatedProduct.name %></h4>
-      <p><%= relatedProduct.price %> تومان</p>
-    </a>
-    <% } %>
-  </div>
-</div>
-  
-<!-- </div> -->
-<div class="small-container comment-section-container">
 
-<form class="" action="/api/product/comment/<%= product._id %>" method="POST" >
-  
-  <div
-    class="comment-text-container"
-  >
-    <label for="comment" >Your comment</label>
-    <textarea
-    name="comment"
-      id="comment"
-      rows="6"
-      class=" focus:outline-none"
-      placeholder="لطفا نظر خود را بنویسید..."
-      required
-    ></textarea>
-  </div>
-
-  <div class="comment-input-container">
-    <input
-      type="email"
-      name="email"
-      value=""
-      placeholder="ایمیل خود را وارد کنید"
-      class=""
-    />
-    <input
-    type="text"
-    name="name"
-    placeholder="نام خود را وارد کنید"
-    class="" />
-  </div>
-  <button
-    type="submit"
-    class="btn"
-  >
-    ارسال کامنت
-  </button>
-</form>
-
-<% for(const item of product.comments.reverse()){ %>
-
-  <div class="cm">
-    <div class="cm-cm">
-      <span >
-        <p><%= item.comment.name %></p>
-        <p><%= item.comment.createdAt.toLocaleString('fa-IR-u-nu-latn').split(',',1) %></p>
-      </span>
-      <p><%= item.comment.comment %></p>
+    <!-- products -->
+    <!-- <div class="small-container"> -->
+    <div class="row-sp">
+      <% for(const relatedProduct of product.relatedProduct){ %>
+      <a href="/api/product/getProduct/<%= relatedProduct._id %>" class="col-4">
+        <img src="<%= relatedProduct.imageUrl[0] %>" alt="" />
+        <h4><%= relatedProduct.name %></h4>
+        <p><%= relatedProduct.price %> تومان</p>
+      </a>
+      <% } %>
     </div>
-    <% if(item.reply){ %>
-    <div class="cm-reply">
-      <p>پاسخ ادمین👨🏻‍💻</p>
-      <p><%= item.reply %></p>
-    </div>
-    <% } %>
   </div>
-  <%  } %>
-</div>
+
+  <!-- </div> -->
+  <div class="small-container comment-section-container">
+
+    <form class="" action="/api/product/comment/<%= product._id %>" method="POST">
+
+      <div class="comment-text-container">
+        <label for="comment">Your comment</label>
+        <textarea name="comment" id="comment" rows="6" class=" focus:outline-none" placeholder="لطفا نظر خود را بنویسید..." required></textarea>
+      </div>
+
+      <div class="comment-input-container">
+        <input type="email" name="email" value="" placeholder="ایمیل خود را وارد کنید" class="" />
+        <input type="text" name="name" placeholder="نام خود را وارد کنید" class="" />
+      </div>
+      <button type="submit" class="btn">
+        ارسال کامنت
+      </button>
+    </form>
+
+    <% for(const item of product.comments.reverse()){ %>
+
+    <div class="cm">
+      <div class="cm-cm">
+        <span>
+          <p><%= item.comment.name %></p>
+          <p><%= item.comment.createdAt.toLocaleString('fa-IR-u-nu-latn').split(',',1) %></p>
+        </span>
+        <p><%= item.comment.comment %></p>
+      </div>
+      <% if(item.reply){ %>
+      <div class="cm-reply">
+        <p>پاسخ ادمین👨🏻‍💻</p>
+        <p><%= item.reply %></p>
+      </div>
+      <% } %>
+    </div>
+    <%  } %>
+  </div>
 </div>
 
 

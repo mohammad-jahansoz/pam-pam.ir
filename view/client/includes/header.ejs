@@ -9,30 +9,30 @@
       <form class="container" method="POST" action="/api/product/getProducts/<%= ( typeof category === 'undefined' || category === "" || category === "all") ? "all" : category  %>">
         <input type="text" name="search" placeholder="جستجو در <%= ( typeof category === 'undefined' || category === "" || category === "all") ? "تمام محصولات" : `${category} ها` %>">
         <div class="search"></div>
-       </form>
+      </form>
     </div>
   </ul>
   <div class="header-icons">
-    
-    
+
+
     <div class="bx bx-menu" id="menu-icon"></div>
     <% if(user){ %>
-      <a href="/api/product/getCart"><i class="bx bx-shopping-bag"></i></a>
+    <a href="/api/product/getCart"><i class="bx bx-shopping-bag"></i></a>
     <div class="dropdown">
       <input class="dropdown-toggle" type="text">
       <div class="dropdown-text">
-       مدیریت اکانت
-    </div>
+        مدیریت اکانت
+      </div>
       <ul class="dropdown-content">
         <li><a href="/api/product/getCart">سبد خرید</a></li>
-        <li><a href="#">خرید های قدیم</a></li>
+        <li><a href="/api/user/getOrders">خرید های قدیم</a></li>
         <li><a href="/api/auth/logout">خروج از اکانت</a></li>
       </ul>
     </div>
     <% }else{ %>
 
-      <a href="/api/auth/signin"><i class='bx bxs-user'></i></a>
+    <a href="/api/auth/signin"><i class='bx bxs-user'></i></a>
 
-      <% } %>
+    <% } %>
   </div>
 </header>

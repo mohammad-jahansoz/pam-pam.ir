@@ -15,7 +15,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-const userController = require('./controller/user')
+const userController = require("./controller/user");
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
@@ -41,7 +41,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/receipt',userController.designOrder)
+app.get("/receipt", userController.designOrder);
 app.use(productsRoutes);
 app.use(authRoutes);
 app.use(error);

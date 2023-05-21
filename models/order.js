@@ -38,10 +38,9 @@ const orderSchema = new mongoose.Schema(
     },
     note: String,
     paymentInfo: {
-      date: Date,
       totalPrice: Number,
       shopTrackingCode: Number,
-      postTrackingCode: Number,
+      postTrackingCode: String,
       referenceId: String,
       bankTrackingCode: String,
     },

@@ -947,7 +947,6 @@ form a {
 table {
   width: 100%;
   border-collapse: collapse;
- 
 }
 .cart-info {
   display: flex;
@@ -1002,4 +1001,33 @@ table {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.orders-parent-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .orders-parent-container {
+    grid-template-columns: 1fr !important;
+  }
+  .orders-container {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .orders-container {
+    width: 95%;
+  }
+}
+
+@media (max-width: 1100px) {
+  .orders-container div ul li {
+    display: flex;
+    flex-direction: column;
+  }
 }
