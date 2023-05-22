@@ -31,7 +31,6 @@ app.use(
     saveUninitialized: false,
     store: MongoStore.create({
       mongoUrl: "mongodb://127.0.0.1:27017/pam-pam",
-
       ttl: 60 * 60 * 24 * 365,
     }),
   })
