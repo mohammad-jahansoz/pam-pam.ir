@@ -39,6 +39,8 @@ app.use(flash());
 
 app.use(checkUser);
 app.use((req, res, next) => {
+  res.locals.search = "";
+  res.locals.path = "";
   res.locals.user = req.user;
   next();
 });
@@ -50,7 +52,7 @@ app.use(error);
 
 app.get("/", async (req, res) => {
   const products = await Product.find().limit(4);
-  res.render("client/index", { products });
+  res.render("client/index", { products, path: "home" });
 });
 
 app.use("/admin", adminRoutes);

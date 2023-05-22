@@ -50,22 +50,36 @@
  <!--  -->
 
  <div class="tab-nav-container">
-   <a href="/" class="tab active ">
+   <a href="/" class="tab <%= ( path == "home") ? "active" : "" %> ">
      <i class='bx bx-home'></i>
      <p>خانه</p>
    </a>
-   <a href="/api/product/getCart" class="tab">
+   <a href="/api/product/getCart" class="tab <%= ( path === "cart") ? "active" : "" %>">
      <i class="bx bx-cart-alt"></i>
      <p>سبد خرید</p>
    </a>
-   <a href="/api/user/getOrders" class="tab">
+   <% if(user){ %>
+   <a href="/api/user/getOrders" class="tab <%= ( path === "orders") ? "active" : "" %>">
      <i class='bx bx-list-ol'></i>
      <p>لیست خرید</p>
    </a>
-   <a href="#" class="tab search-icon">
+   <% }else{ %>
+   <a href="/api/auth/signin" class="tab <%= ( path === "auth") ? "active" : "" %>">
+     <i class='bx bx-log-in'></i>
+     <p>ورود</p>
+   </a>
+   <% } %>
+   <% if(search){ %>
+   <a href="#" class="tab search-icon active">
      <i class='bx bx-search search-btn'></i>
      <p>جستجو</p>
    </a>
+   <% }else{ %>
+   <a href="#" class="tab search-icon ">
+     <i class='bx bx-search search-btn'></i>
+     <p>جستجو</p>
+   </a>
+   <% } %>
    <!--  -->
    <div class="search-overlay">
    </div>

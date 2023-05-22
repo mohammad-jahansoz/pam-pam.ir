@@ -43,7 +43,10 @@ exports.getCart = async (req, res, next) => {
     "cart.productId",
     "-relatedProduct -category -views -likes -comments -createdAt -updatedAt -__v"
   );
-  res.render("client/cart", { cart: userWithProductsInCart.cart });
+  res.render("client/cart", {
+    cart: userWithProductsInCart.cart,
+    path: "cart",
+  });
 };
 
 exports.setOrder = async (req, res, next) => {
@@ -150,7 +153,10 @@ exports.getOrders = async (req, res, next) => {
     options: { sort: { createdAt: -1 } },
   });
 
-  res.render("client/getOrders", { orders: userWithOrders.order });
+  res.render("client/getOrders", {
+    orders: userWithOrders.order,
+    path: "orders",
+  });
 };
 
 exports.downloadReceipt = async (req, res, next) => {

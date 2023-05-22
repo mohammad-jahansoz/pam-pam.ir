@@ -462,7 +462,14 @@ header.sticky {
   }
 }
 
+.logout-mobile {
+  display: none;
+}
+
 @media (max-width: 670px) {
+  .logout-mobile {
+    display: block !important;
+  }
   .sign-input span {
     flex-direction: column;
     align-items: start !important;

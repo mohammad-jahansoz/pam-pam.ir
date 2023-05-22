@@ -4,7 +4,9 @@
   <ul class="navlist">
     <li><a href="/">خانه</a></li>
     <li><a href="http://localhost:3000/#featured">دسته بندی</a></li>
-    <li><a href="#contact">درباره ما</a></li>
+
+    <li class="logout-mobile"><a href="/api/auth/logout">خروج از اکانت</a></li>
+
     <div class="search-container" style="position: relative;">
       <form class="container" method="POST" action="/api/product/getProducts/<%= ( typeof category === 'undefined' || category === "" || category === "all") ? "all" : category  %>">
         <input type="text" name="search" placeholder="جستجو در <%= ( typeof category === 'undefined' || category === "" || category === "all") ? "تمام محصولات" : `${category} ها` %>">

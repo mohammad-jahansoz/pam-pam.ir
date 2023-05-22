@@ -108,7 +108,7 @@ exports.getSignin = async (req, res, next) => {
   if (message.length <= 0) {
     message = null;
   }
-  res.render("client/signin", { message });
+  res.render("client/signin", { message, path: "auth" });
 };
 
 exports.getSignup = (req, res, next) => {
