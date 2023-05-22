@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
     "connect-mongo": "^5.0.0",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.9",
@@ -23,6 +24,7 @@
     "mongoose-aggregate-paginate-v2": "^1.0.6",
     "mongoose-paginate-v2": "^1.7.1",
     "nodemailer": "^6.9.1",
+    "puppeteer": "^20.3.0",
     "winston": "^3.8.2",
     "winston-mongodb": "^5.1.1",
     "zarinpal-checkout": "^0.2.7"

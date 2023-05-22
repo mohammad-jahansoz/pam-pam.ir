@@ -47,7 +47,7 @@
         </tr>
       </table>
       <span style="display: flex; text-align: center; gap: 2px; ">
-        <a href="#" style=" border-radius: 0 0 1.8rem 0; width: 100%; display: block; background-color: <%= (order.status === 1) ? 'red' : 'green' %>;">دانلود فاکتور</a>
+        <a href="/api/user/downloadReceipt/<%= order._id %>" style=" border-radius: 0 0 1.8rem 0; width: 100%; display: block; background-color: <%= (order.status === 1) ? 'red' : 'green' %>;">دانلود فاکتور</a>
         <a href="#" style=" border-radius: 0 0 0 1.8rem; width: 100%; display: block; background-color: <%= (order.status === 1) ? 'red' : 'green' %>;">پیگیری مرسوله</a>
       </span>
     </div>

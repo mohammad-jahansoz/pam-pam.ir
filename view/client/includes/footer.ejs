@@ -62,10 +62,21 @@
      <i class='bx bx-list-ol'></i>
      <p>لیست خرید</p>
    </a>
-   <a href="#" class="tab">
-     <i class='bx bx-search'></i>
+   <a href="#" class="tab search-icon">
+     <i class='bx bx-search search-btn'></i>
      <p>جستجو</p>
    </a>
+   <!--  -->
+   <div class="search-overlay">
+   </div>
+   <div class="search-popup">
+     <form class="search-form" method="POST" action="/api/product/getProducts/<%= ( typeof category === 'undefined' || category === "" || category === "all") ? "all" : category  %>">
+       <div class="form-group">
+         <input type="text" class="form-control" name="search" placeholder="جستجو در <%= ( typeof category === 'undefined' || category === "" || category === "all") ? "تمام محصولات" : `${category} ها` %>">
+         <button type="submit" class="submit-btn"><i class="bx bx-search"></i></button>
+       </div>
+     </form>
+   </div>
  </div>
 
  <!--  -->
@@ -88,6 +99,24 @@
 
      });
    });
+
+   //  
+   const searchBtn = document.querySelector(".search-btn");
+   const searchOverlay = document.querySelector(".search-overlay");
+   const searchPopup = document.querySelector(".search-popup");
+
+   searchBtn.addEventListener("click", () => {
+     searchOverlay.classList.add("activeS");
+     searchPopup.classList.add("activeS");
+   })
+
+
+   searchOverlay.addEventListener("click", (event) => {
+     if (event.target == searchOverlay) {
+       searchOverlay.classList.remove("activeS");
+       searchPopup.classList.remove("activeS");
+     }
+   })
  </script>
  </body>
 

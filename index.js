@@ -16,6 +16,7 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const userController = require("./controller/user");
+const flash = require("connect-flash");
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
@@ -26,14 +27,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
     store: MongoStore.create({
       mongoUrl: "mongodb://127.0.0.1:27017/pam-pam",
-      // resave: false,
-      // saveUninitialized: false,
+
       ttl: 60 * 60 * 24 * 365,
     }),
   })
 );
+app.use(flash());
 
 app.use(checkUser);
 app.use((req, res, next) => {

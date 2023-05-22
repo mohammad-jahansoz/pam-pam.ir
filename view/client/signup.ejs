@@ -8,6 +8,14 @@
     <h3>ثبت نام</h3>
 
     <div>
+      <% if(message){ %>
+      <h5 style="text-align: center;
+      color: red;
+      border: 1px solid red;
+      border-radius: 16px;
+      padding: 2px;
+      background-color: #64000059; margin-bottom: 2rem;"><%=  message  %></h5>
+      <% } %>
 
 
 
@@ -15,7 +23,7 @@
 
         <input type="text" name="email" placeholder="ایمیل خود را وارد کنید">
         <input type="text" name="password" placeholder="پسورد خود را وارد کنید">
-        <button type="submit" class="btn">ثبت</button>
+        <button type="submit" class="btn">ثبت نام</button>
 
       </form>
 

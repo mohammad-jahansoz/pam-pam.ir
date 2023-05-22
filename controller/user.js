@@ -2,7 +2,8 @@ const Product = require("../models/product");
 const User = require("../models/user");
 const Order = require("../models/order");
 const nodemailer = require("nodemailer");
-
+const ejs = require("ejs");
+const puppeteer = require("puppeteer");
 const zarinpal_checkout = require("zarinpal-checkout");
 
 const zarinpal = zarinpal_checkout.create(
@@ -150,4 +151,22 @@ exports.getOrders = async (req, res, next) => {
   });
 
   res.render("client/getOrders", { orders: userWithOrders.order });
+};
+
+exports.downloadReceipt = async (req, res, next) => {
+  const orderId = req.params.orderId;
+  const order = await Order.findById(orderId);
+  let browser;
+  browser = await puppeteer.launch({ headless: "new" });
+  const [page] = await browser.pages();
+  const html = await ejs.renderFile(`${__dirname}/../view/client/invoice.ejs`, {
+    order,
+  });
+  // res.render("client/invoice", { order });
+  await page.setContent(html);
+  const pdf = await page.pdf({ format: "A4" });
+  res.contentType("application/pdf");
+  res.setHeader("Content-Disposition", "attachment; filename=invoice.pdf");
+  res.send(pdf);
+  page.close();
 };

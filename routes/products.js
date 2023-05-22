@@ -26,5 +26,9 @@ router.get(
 router.get("/api/user/getOrderForm", userController.getOrderForm);
 router.post("/api/user/orderForm", userController.setOrder);
 router.get("/api/user/getOrders", userController.getOrders);
+router.get(
+  "/api/user/downloadReceipt/:orderId",
+  userController.downloadReceipt
+);
 
 module.exports = router;

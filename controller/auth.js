@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const logger = require("../startup/logger");
+const flash = require("connect-flash");
 
 const transporter = nodemailer.createTransport({
   host: process.env.NODEMAILER_HOST,
@@ -18,27 +19,34 @@ exports.postSignUp = async (req, res, next) => {
   const { email, password } = req.body;
   let findUser = await User.findOne({ email: email });
   if (findUser) {
-    return res.status(400).send("you have account in our database . pls login");
+    req.flash(
+      "message",
+      `با ایمیل ${email} قبلا ثبت نام کرده اید!لطفا وارد شوید.`
+    );
+    return res.redirect("/api/auth/signup");
   }
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
   const user = new User({ email: email, password: hash });
   await user.save();
-
   req.session._id = user._id;
+  res.redirect("/");
 };
 
 exports.postSignIn = async (req, res, next) => {
   const { email, password } = req.body;
   let user = await User.findOne({ email: email });
   if (!user) {
-    return res
-      .status(400)
-      .send(`we havent any user with ${email} email . pls signup `);
+    req.flash("message", `کاربری با ایمیل ${email} پیدا نشد!`);
+    return res.redirect("/api/auth/signin");
   }
   const result = await bcrypt.compare(password, user.password);
   if (!result) {
-    return res.status(400).send("your password is incorrect ! try again");
+    req.flash(
+      "message",
+      `رمز وارد شده اشتباه میباشد!اگر رمز خود را فراموش کرده اید از گزینه فراموشی رمز عبور استفاده کنید!`
+    );
+    return res.redirect("/api/auth/signin");
   }
   req.session._id = user._id;
   res.redirect("/");
@@ -96,11 +104,19 @@ exports.verifyPasswordRecoveryEmail = async (req, res, next) => {
 // };
 
 exports.getSignin = async (req, res, next) => {
-  res.render("client/signin");
+  let message = req.flash("message");
+  if (message.length <= 0) {
+    message = null;
+  }
+  res.render("client/signin", { message });
 };
 
 exports.getSignup = (req, res, next) => {
-  res.render("client/signup");
+  let message = req.flash("message");
+  if (message.length <= 0) {
+    message = null;
+  }
+  res.render("client/signup", { message });
 };
 
 exports.logout = (req, res, next) => {

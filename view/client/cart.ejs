@@ -1,9 +1,9 @@
 <%- include('./includes/head') -%> <%- include('./includes/header') -%>
 
 
-
+<% let totalPrice = 0 %>
 <div class="small-container cart-page">
-
+  <% if(cart > 0){ %>
   <table>
     <tr>
       <th>
@@ -13,7 +13,8 @@
       <th>قیمت کل</th>
       <th>حذف</th>
     </tr>
-    <% let totalPrice = 0 %>
+
+
     <% for(const item of cart){ %>
     <tr>
       <td>
@@ -31,6 +32,7 @@
     </tr>
     <% } %>
 
+
   </table>
   <div>
     <span>
@@ -40,6 +42,14 @@
     </span>
     <a href="/api/user/getOrderForm" class="btn">ادامه فرایند خرید</a>
   </div>
+  <% }else{ %>
+  <div style="text-align: center; display: flex; flex-direction: column;">
+    <i style="color: green; font-size: 3rem;" class='bx bx-cart-add'></i>
+    <h4 style="color: green;
+  font-size: 2rem;">سبد خرید شما خالی میباشد!</h4>
+    <p>برای خرید محصولات ما اول باید به <a style="color: green;" href="/api/product/getProducts/all">این لینک</a> برید و اونجا هر محصولی که دوست داشتید رو انتخاب کنید سپس تعدادش رو مشخص کنید و در نهایت به سبد خرید اضافه کنید!</p>
+  </div>
+  <% } %>
 </div>
 
 
