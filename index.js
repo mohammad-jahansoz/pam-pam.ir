@@ -17,6 +17,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const userController = require("./controller/user");
 const flash = require("connect-flash");
+const general = require("./controller/general");
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
@@ -48,7 +49,7 @@ app.use((req, res, next) => {
 app.get("/receipt", userController.designOrder);
 app.use(productsRoutes);
 app.use(authRoutes);
-app.use(error);
+app.use(general);
 
 app.get("/", async (req, res) => {
   const products = await Product.find().limit(4);
@@ -57,9 +58,8 @@ app.get("/", async (req, res) => {
 
 app.use("/admin", adminRoutes);
 
-app.use((req, res, next) => {
-  res.status(404).send("mistake url . 404 page not found");
-});
+app.use(error.error);
+app.use(error.error404);
 
 app.listen(3000, () => {
   console.log("app running on port 3000");
