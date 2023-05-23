@@ -160,7 +160,7 @@ section {
 }
 .btn:hover {
   transform: translateY(-5px);
-  background: var(--text-color);
+  background: var(--main-color);
 }
 
 header.sticky {

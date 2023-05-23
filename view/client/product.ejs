@@ -42,12 +42,77 @@
         <option>M</option>
         <option>S</option>
       </select> -->
+
+        <% if(user){ %>
+        <div class="backdrop">
+          <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
         <form action="/api/product/addToCart" method="post">
           <input type="hidden" name="productId" value="<%= product._id %>">
           <input type="number" name="quantity" value="1" min="1" />
           <label for="quantity"> تعداد </label>
-          <button type="submit" href="" class="btn">افزودن به سبد خرید</button>
+          <button type="submit" class="btn show-modal">افزودن به سبد خرید</button>
         </form>
+        <div class="modal">
+          <div class="shape">
+            <div class="face2">
+              <div class="eye"></div>
+              <div class="eye right"></div>
+              <div class="mouth sad" style="transform: rotate(230deg);"></div>
+            </div>
+            <div class="shadow move"></div>
+          </div>
+          <h1>تبریک میگم</h1>
+          <p>شما کالارو با موفقیت به سبد خریدتون اضافه کردید!برای تکمیل سفارش و ارسال به سبد خریدتون برید و اونجا پرداخت رو انجام بدید</p>
+          <div style="display: flex; gap: 1rem;">
+            <a href="/api/product/getCart" class="btn close-modal">سبد خرید</a>
+            <a href="/api/product/getProducts/all" class="btn ">سایر محصولات</a>
+          </div>
+        </div>
+        <% }else{ %>
+        <div class="backdrop">
+          <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+        <button class="btn show-modal">افزودن به سبد خرید</button>
+        <div class="modal">
+          <div class="shape">
+            <div class="face2">
+              <div class="eye"></div>
+              <div class="eye right"></div>
+              <div class="mouth sad" style="transform: rotate(45deg);"></div>
+            </div>
+            <div class="shadow move"></div>
+          </div>
+          <h1>متاسفیم!</h1>
+          <p>برای خرید ابتدا باید توی سایت ما ثبت نام کنید یا اگر حساب کاربری دارید وارد شوید!</p>
+          <div style="display: flex; gap: 1rem;">
+            <a href="/api/auth/signin" class="btn close-modal">ورود</a>
+            <a href="/api/auth/signup" class="btn ">ثبت نام </a>
+          </div>
+        </div>
+        <% }%>
         <h3>توضیحات <i class="fas fa-indent"></i></h3>
         <br />
         <p>
@@ -140,6 +205,31 @@
   SmallImg[3].onclick = function() {
     ProductImg.src = SmallImg[3].src;
   };
+
+
+  const showModalBtn = document.querySelector(".show-modal");
+  const modal = document.querySelector(".modal");
+  const backDrop = document.querySelector(".backdrop");
+  const closeModal = document.querySelector(".close-modal");
+  const confirmModal = document.querySelector(".confirm-modal");
+
+  showModalBtn.addEventListener("click", () => {
+    modal.style.opacity = "1";
+    modal.style.transform = "translate(-50%,-50%)", "translateY(0)";
+    backDrop.style.display = "block";
+  });
+
+  function closeModalFunction() {
+    modal.style.opacity = "0";
+    modal.style.transform = "scale(0.0)", "translateY(30px)";
+    backDrop.style.display = "none";
+  }
+  closeModal.addEventListener("click", closeModalFunction);
+  backDrop.addEventListener("click", closeModalFunction);
+  confirmModal.addEventListener("click", () => {
+    closeModalFunction();
+    alert('Confirm it later');
+  })
 </script>
 
 

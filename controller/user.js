@@ -35,7 +35,8 @@ exports.deleteCartItem = async (req, res, next) => {
 
 exports.addToCart = async (req, res, next) => {
   const { productId, quantity } = req.body;
-  const result = await req.user.addToCart(productId, +quantity);
+  await req.user.addToCart(productId, +quantity);
+  res.end();
 };
 
 exports.getCart = async (req, res, next) => {
