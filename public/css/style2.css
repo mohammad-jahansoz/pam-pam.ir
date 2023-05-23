@@ -1078,7 +1078,7 @@ table {
 }
 
 .tab.active p {
-  margin-left: 10px;
+  margin-left: 5px;
   max-width: 200px;
   transition: max-width 0.4s linear;
 }

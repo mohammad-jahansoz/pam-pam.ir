@@ -73,7 +73,22 @@
      <p>خانه</p>
    </a>
    <a href="/api/product/getCart" class="tab <%= ( path === "cart") ? "active" : "" %>">
-     <i class="bx bx-cart-alt"></i>
+     <span style="display: flex;
+     align-items: center;">
+
+       <p style="
+       width: 20px !important;
+       max-width: 200px;
+       text-align: center;
+       height: 25px;
+       font-weight: 900;
+       color: red;
+       font-size: 13px;
+       border: 1px solid red;
+      
+       border-radius: 50%;overflow: inherit;">3</p>
+       <i class="bx bx-cart-alt"></i>
+     </span>
      <p>سبد خرید</p>
    </a>
    <% if(user){ %>

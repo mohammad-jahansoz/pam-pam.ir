@@ -19,7 +19,21 @@
 
     <div class="bx bx-menu" id="menu-icon"></div>
     <% if(user){ %>
-    <a class="desktop" href="/api/product/getCart"><i class="bx bx-shopping-bag"></i></a>
+    <a class="desktop" href="/api/product/getCart" style="position: relative;">
+      <i class="bx bx-shopping-bag"></i>
+      <p style="position: absolute;
+      width: 20px;
+      text-align: center;
+      height: 25px;
+      top: -12px;
+      right: 8px;
+      font-weight: 900;
+      color: red;
+      font-size: 13px;
+      border: 1px solid red;
+      background-color: #bc000054;
+      border-radius: 50%;"><%= user.cart.length %></p>
+    </a>
     <div class="dropdown">
       <input class="dropdown-toggle" type="text">
       <div class="dropdown-text">

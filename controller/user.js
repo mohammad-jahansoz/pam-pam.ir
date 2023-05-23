@@ -43,6 +43,7 @@ exports.getCart = async (req, res, next) => {
     "cart.productId",
     "-relatedProduct -category -views -likes -comments -createdAt -updatedAt -__v"
   );
+
   res.render("client/cart", {
     cart: userWithProductsInCart.cart,
     path: "cart",
