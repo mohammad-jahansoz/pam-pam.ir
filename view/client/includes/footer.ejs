@@ -76,7 +76,7 @@
      <span style="display: flex;
      align-items: center;">
 
-       <p style="
+       <p id="itemInCart2" style="
        width: 20px !important;
        max-width: 200px;
        text-align: center;
@@ -86,7 +86,7 @@
        font-size: 13px;
        border: 1px solid red;
       
-       border-radius: 50%;overflow: inherit;">3</p>
+       border-radius: 50%;overflow: inherit;"><%= (user) ? user.cart.length : "0" %></p>
        <i class="bx bx-cart-alt"></i>
      </span>
      <p>سبد خرید</p>
@@ -164,6 +164,33 @@
        searchPopup.classList.remove("activeS");
      }
    })
+
+   function addToCart(btn) {
+     const productEL = btn.parentNode;
+     const productId = productEL.querySelector("[name=productId]").value;
+     const quantity = productEL.querySelector("[name=quantity]").value;
+     fetch("/api/product/addToCart", {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/json"
+         },
+         body: JSON.stringify({
+           productId: productId,
+           quantity: quantity
+         })
+       })
+       .then(response => response.json())
+       .then(data => {
+         if (!data.tekrari) {
+           let itemInCart = document.querySelector("#itemInCart").innerText;
+           itemInCart = +itemInCart + 1;
+           document.querySelector("#itemInCart").innerText = itemInCart
+           document.querySelector("#itemInCart2").innerText = itemInCart
+         }
+       }).catch(error => {
+         console.error(error);
+       });
+   }
  </script>
  </body>
 

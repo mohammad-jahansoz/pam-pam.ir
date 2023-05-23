@@ -21,7 +21,7 @@
     <% if(user){ %>
     <a class="desktop" href="/api/product/getCart" style="position: relative;">
       <i class="bx bx-shopping-bag"></i>
-      <p style="position: absolute;
+      <p id="itemInCart" style="position: absolute;
       width: 20px;
       text-align: center;
       height: 25px;
@@ -32,7 +32,7 @@
       font-size: 13px;
       border: 1px solid red;
       background-color: #bc000054;
-      border-radius: 50%;"><%= user.cart.length %></p>
+      border-radius: 50%;"><%= (user) ? user.cart.length : "0" %></p>
     </a>
     <div class="dropdown">
       <input class="dropdown-toggle" type="text">

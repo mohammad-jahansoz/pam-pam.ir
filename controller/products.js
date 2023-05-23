@@ -59,7 +59,7 @@ exports.setComment = async (req, res, next) => {
       },
     },
   });
-  res.redirect(`/api/product/getProduct/${productId}`);
+  res.redirect(`/api/product/getProduct/${productId}/#comments`);
 };
 
 exports.searchProducts = async (req, res, next) => {

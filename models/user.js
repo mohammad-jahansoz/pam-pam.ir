@@ -42,14 +42,18 @@ UserSchema.methods.addToCart = async function (productId, quantity) {
   const productIndex = cartItem.findIndex((i) => {
     return i.productId.toString() === productId.toString();
   });
+  let tekrari;
   if (productIndex < 0) {
     cartItem.push({ productId, quantity });
+    tekrari = false;
   } else {
     cartItem[productIndex].quantity += quantity;
+    tekrari = true;
   }
 
   this.cart = cartItem;
-  return await this.save();
+  await this.save();
+  return tekrari;
 };
 
 const User = new mongoose.model("user", UserSchema);

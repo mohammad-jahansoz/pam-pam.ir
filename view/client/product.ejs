@@ -58,12 +58,12 @@
             <li></li>
           </ul>
         </div>
-        <form action="/api/product/addToCart" method="post">
+        <div>
           <input type="hidden" name="productId" value="<%= product._id %>">
           <input type="number" name="quantity" value="1" min="1" />
           <label for="quantity"> تعداد </label>
-          <button type="submit" class="btn show-modal">افزودن به سبد خرید</button>
-        </form>
+          <button onclick="addToCart(this)" type="submit" class="btn show-modal">افزودن به سبد خرید</button>
+        </div>
         <div class="modal">
           <div class="shape">
             <div class="face2">
@@ -150,7 +150,7 @@
   </div>
 
   <!-- </div> -->
-  <div class="small-container comment-section-container">
+  <div id="comments" class="small-container comment-section-container">
 
     <form class="" action="/api/product/comment/<%= product._id %>" method="POST">
 
