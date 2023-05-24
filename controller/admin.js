@@ -146,3 +146,7 @@ exports.searchOrder = async (req, res, next) => {
     res.send(order);
   }
 };
+
+exports.getSignIn = (req, res, next) => {
+  res.render("admin/signIn");
+};

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin on pam-pam</title>
+</head>
+
+<body>
+  <div style="width: 100%;">
+    <% for(const product of products){ %>
+    <div>
+      <img src="<%= product.imageUrl[0] %>" alt="">
+      <h4><%= product.name %></h4>
+      <a href="#">delete</a>
+      <a href="#">Edit</a>
+    </div>
+    <% } %>
+  </div>
+</body>
+
+</html>

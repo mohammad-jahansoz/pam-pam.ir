@@ -23,5 +23,6 @@ router.delete(
   adminController.deleteComment
 );
 router.post("/api/order/search", adminController.searchOrder);
+router.get("/signin", adminController.getSignIn);
 
 module.exports = router;
