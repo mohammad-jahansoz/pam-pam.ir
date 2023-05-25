@@ -1,6 +1,18 @@
+@font-face {
+  font-family: Yekan;
+  src: url("../fonts/Yekan.ttf") format("true type");
+  src: url("../fonts/Yekan.eot");
+  src: url("../fonts/Yekan.eot?#iefix") format("Yekan-opentype");
+  src: url("../fonts/Yekan.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 body {
-  font-family: cursive;
+  font-family: Yekan;
   background: linear-gradient(#141e30, #243b55);
+}
+input {
+  font-family: Yekan;
 }
 .login-box {
   position: absolute;
@@ -160,4 +172,55 @@ body {
   100% {
     bottom: 100%;
   }
+}
+
+.products-container {
+  color: white;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+  align-items: center;
+}
+.products-container div img {
+  width: 100%;
+}
+.products-container div a {
+  background-color: green;
+  padding: 7px;
+  border-radius: 2rem;
+  color: white;
+  text-decoration: none;
+}
+.products-container div a:hover,
+.products-container div a:active {
+  color: black;
+}
+
+.add-edit-product {
+  width: 80%;
+  text-align: center;
+  margin: auto;
+}
+.add-edit-product form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem 4rem;
+}
+
+.add-edit-product form input {
+  padding: 1rem;
+  border: 3px solid green;
+  border-radius: 2rem;
+}
+
+.category-section {
+  color: white;
+}
+
+.category-section select {
+  font-family: "Yekan";
+  padding: 5px;
+  border-radius: 2rem;
+  font-size: 1rem;
 }

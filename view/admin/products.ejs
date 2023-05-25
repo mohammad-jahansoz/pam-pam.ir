@@ -5,17 +5,19 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/admin.css">
   <title>Admin on pam-pam</title>
 </head>
 
 <body>
-  <div style="width: 100%;">
+  <div class="products-container">
     <% for(const product of products){ %>
     <div>
       <img src="<%= product.imageUrl[0] %>" alt="">
       <h4><%= product.name %></h4>
-      <a href="#">delete</a>
-      <a href="#">Edit</a>
+      <p><%= product.price %></p>
+      <a class="btn" href="/admin/deleteProduct/<%= product._id %>">delete</a>
+      <a class="btn" href="#">Edit</a>
     </div>
     <% } %>
   </div>

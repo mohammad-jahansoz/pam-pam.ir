@@ -1,18 +1,19 @@
 @font-face {
   font-family: Yekan;
   src: url("../fonts/Yekan.ttf") format("true type");
-  src: url("../fonts/Yekan.eot");
-  src: url("../fonts/Yekan.eot?#iefix") format("Yekan-opentype");
-  src: url("../fonts/Yekan.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
+}
+@font-face {
+  font-family: Vazir;
+  src: url("../fonts/Vazir.eot"),
+    url("../fonts/Vazir.eot?#iefix") format("Yekan-opentype"),
+    url("../fonts/Vazir.woff") format("woff");
 }
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Yekan", sans-serif;
+  font-family: "Vazir", "Yekan";
   list-style: none;
   text-decoration: none;
   scroll-behavior: smooth;

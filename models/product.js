@@ -13,11 +13,7 @@ const ProductSchema = new Schema(
       maxLength: 255,
       trim: true,
     },
-    // imageUrl: {
-    //   type: String,
-    //   default:
-    //     "https://apollobattery.com.au/wp-content/uploads/2022/08/default-product-image.png",
-    // },
+    details: String,
     imageUrl: [
       {
         type: String,

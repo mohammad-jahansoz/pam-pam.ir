@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const adminController = require("../controller/admin");
 
-router.get("/api/products", adminController.getProducts);
-router.post("/api/product", adminController.addProduct);
-router.delete("/api/product/:id", adminController.removeProduct);
+router.get("/products", adminController.getProducts);
+router.get("/addProduct", adminController.getAddProduct);
+router.post("/allProduct", adminController.addProduct);
+router.get("/deleteProduct/:id", adminController.deleteProduct);
 router.put("/api/product/:id", adminController.updateProduct);
 router.get("/api/products/comments", adminController.getComments);
 router.get(

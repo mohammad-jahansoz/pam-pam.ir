@@ -31,38 +31,60 @@ exports.updateProduct = async (req, res, next) => {
   res.status(200).send(product);
 };
 
+exports.getAddProduct = (req, res, next) => {
+  res.render("admin/addProduct");
+};
+
 exports.addProduct = async (req, res, next) => {
   const sale = req.body.sale;
   const name = req.body.name;
   const count = req.body.count;
+  const details = req.body.details;
   const category = req.body.category;
-  const relatedProduct = req.body.relatedProduct;
+  const relatedProduct1 = req.body.relatedProduct1;
+  const relatedProduct2 = req.body.relatedProduct2;
+  const relatedProduct3 = req.body.relatedProduct3;
+  const relatedProduct4 = req.body.relatedProduct4;
   const price = req.body.price;
-  const imageUrl = req.body.imageUrl;
+  const imageUrl1 = req.body.imageUrl1;
+  const imageUrl2 = req.body.imageUrl2;
+  const imageUrl3 = req.body.imageUrl3;
+  const imageUrl4 = req.body.imageUrl4;
+  const relatedProductsBody = [
+    relatedProduct1,
+    relatedProduct2,
+    relatedProduct3,
+    relatedProduct4,
+  ];
+  let relatedProducts = [];
+  for (const p of relatedProductsBody) {
+    if (objectId.isValid(p)) {
+      relatedProducts.push(p);
+    }
+  }
 
   const product = new Product({
     name: name,
+    details: details,
     category: category,
     count: count,
     sale: sale,
-    relatedProduct: relatedProduct,
+    relatedProduct: relatedProducts,
     price: price,
-    imageUrl: imageUrl,
+    imageUrl: [imageUrl1, imageUrl2, imageUrl3, imageUrl4],
   });
-  const result = await product.save();
-  res.status(200).send(result);
+  await product.save();
+  res.redirect("/admin/products");
 };
 
-exports.removeProduct = async (req, res, next) => {
+exports.deleteProduct = async (req, res, next) => {
   const productId = req.params.id;
 
   const product = await Product.findByIdAndDelete(productId);
   if (!product) {
     return res.status(404).send("havent any product with this id");
   }
-  return res
-    .status(200)
-    .send(`product ( ${product.name} )  deleted successfully`);
+  res.redirect("/admin/products");
 };
 
 exports.getComments = async (req, res, next) => {
@@ -126,7 +148,7 @@ exports.deleteComment = async (req, res, next) => {
 
 exports.getProducts = async (req, res, next) => {
   const products = await Product.find().sort({ createdAt: -1 });
-  res.status(200).send(products);
+  res.render("admin/products", { products });
 };
 
 exports.searchOrder = async (req, res, next) => {
