@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 
 <head>
   <meta charset="UTF-8">
@@ -10,11 +10,27 @@
 </head>
 
 <body>
-  <div class="add-edit-product">
+  <div style="display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 1rem;;">
     <% for(const comment of comments){ %>
-    <input type="text" name="comment" value="<%= comment.comment %>">
-    <input type="text" name="reply" value="<%= comment.reply %>">
-    <p><%= comment.createdAt %></p>
+    <div style="border: 1px solid green; border-radius: 2rem; padding: 1rem;">
+      <form method="post" action="/admin/product/comment/<%= comment.productId %>/<%= comment.comment._id %>" style="display: flex; flex-direction: column; gap: 3px;">
+        <textarea style="resize: vertical;font-family: Yekan; padding: 0.5rem; border-radius: 2rem;" type="text" name="comment"><%= comment.comment.comment.comment %></textarea>
+        <textarea style="resize: vertical;font-family: Yekan; padding: 0.5rem; border-radius: 2rem;" type="text" placeholder="بدون پاسخ" name="reply"><%= comment.comment.reply %></textarea>
+        <input type="submit" id="submit-form" style="display: none;" />
+        <button class="btn" type="submit">update</button>
+      </form>
+      <span style="  display: flex; align-items: center; justify-content: space-between;">
+        <p style="color: white;
+        border: 2px solid green;
+        direction: ltr;
+        padding: 5px;
+        text-align: center; border-radius: 2rem;"><%= comment.comment.comment.createdAt.toLocaleString('fa-IR-u-nu-latn') %></p>
+        <a class="btn" style=" color: red; background-color: black;
+        text-decoration: none;" href="/admin/product/comment/<%= comment.productId %>/<%= comment.comment._id %>">delete</a>
+      </span>
+    </div>
     <% } %>
   </div>
 </body>

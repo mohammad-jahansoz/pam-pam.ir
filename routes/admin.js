@@ -8,20 +8,19 @@ router.post("/addProduct", adminController.addProduct);
 router.get("/deleteProduct/:id", adminController.deleteProduct);
 router.post("/product/:id", adminController.postEditProduct);
 router.get("/product/:id", adminController.getEditProduct);
-router.get("/api/products/comments", adminController.getComments);
+router.get("/products/comments", adminController.getComments);
 router.get(
   "/api/product/comments/:id",
 
   adminController.getCommentsOfSingleProduct
 );
-router.put(
-  "/api/product/comment/:productId/:commentId",
+router.post(
+  "/product/comment/:productId/:commentId",
 
   adminController.setReply
 );
-router.delete(
-  "/api/product/comment/:productId/:commentId",
-
+router.get(
+  "/product/comment/:productId/:commentId",
   adminController.deleteComment
 );
 router.post("/api/order/search", adminController.searchOrder);

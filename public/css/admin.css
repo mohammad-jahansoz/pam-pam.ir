@@ -224,3 +224,10 @@ input {
   border-radius: 2rem;
   font-size: 1rem;
 }
+
+.btn {
+  padding: 3px;
+  border-radius: 2rem;
+  background-color: green;
+  color: white;
+}

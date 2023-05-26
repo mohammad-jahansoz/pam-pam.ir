@@ -117,19 +117,24 @@ exports.getComments = async (req, res, next) => {
       comments.push({ productId: product._id, comment });
     }
   }
+  const commentsSortByArray = comments.sort((a, b) => {
+    return b.comment.createdAt - a.comment.createdAt;
+  });
+  res.render("admin/getComments", { comments: commentsSortByArray });
 };
 
 exports.getCommentsOfSingleProduct = async (req, res, next) => {
   const productId = req.params.id;
   const product = await Product.findById(productId);
-
   res.status(200).send(product.comments);
 };
 
 exports.setReply = async (req, res, next) => {
   const commentId = req.params.commentId;
   const productId = req.params.productId;
+  const comment = req.body.comment;
   const reply = req.body.reply;
+  console.log(reply);
   const product = await Product.updateOne(
     {
       _id: new objectId(productId),
@@ -137,32 +142,27 @@ exports.setReply = async (req, res, next) => {
     },
     {
       $set: {
+        "comments.$.comment.comment": comment,
         "comments.$.reply": reply,
       },
     }
   );
-  res.send(product);
+  console.log(product);
+  res.redirect("/admin/products/comments");
 };
 
 exports.deleteComment = async (req, res, next) => {
   const productId = req.params.productId;
   const commentId = req.params.commentId;
 
-  console.log(commentId, productId);
-
-  const product = await Product.findByIdAndUpdate(
-    productId,
-    {
-      $pull: {
-        comments: {
-          _id: new objectId(commentId),
-        },
+  await Product.findByIdAndUpdate(productId, {
+    $pull: {
+      comments: {
+        _id: new objectId(commentId),
       },
     },
-    { new: true }
-  );
-  console.log(product);
-  res.send(product);
+  });
+  res.redirect("/admin/products/comments");
 };
 
 exports.getProducts = async (req, res, next) => {
