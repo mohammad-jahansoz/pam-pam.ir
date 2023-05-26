@@ -4,31 +4,53 @@ const Product = require("../models/product");
 const User = require("../models/user");
 const Order = require("../models/order");
 
-exports.updateProduct = async (req, res, next) => {
+exports.getEditProduct = async (req, res, next) => {
   const productId = req.params.id;
-  const name = req.body.name;
-  const category = req.body.category;
-  const relatedProduct = req.body.relatedProduct;
-  const price = req.body.price;
-  const imageUrl = req.body.imageUrl;
-  const count = req.body.count;
+  const product = await Product.findById(productId);
+  res.render("admin/editProduct", { product });
+};
 
-  const product = await Product.findByIdAndUpdate(
-    productId,
-    {
-      name: name,
-      category: category,
-      relatedProduct: relatedProduct,
-      price: price,
-      imageUrl: imageUrl,
-      count: count,
-    },
-    { new: true }
-  );
-  if (!product) {
-    return res.status(404).send(`we havent any product with ${productId} id`);
+exports.postEditProduct = async (req, res, next) => {
+  const productId = req.params.id;
+  const sale = req.body.sale;
+  const name = req.body.name;
+  const count = req.body.count;
+  const details = req.body.details;
+  const category = req.body.category;
+  const relatedProduct1 = req.body.relatedProduct1;
+  const relatedProduct2 = req.body.relatedProduct2;
+  const relatedProduct3 = req.body.relatedProduct3;
+  const relatedProduct4 = req.body.relatedProduct4;
+  const price = req.body.price;
+  const imageUrl1 = req.body.imageUrl1;
+  const imageUrl2 = req.body.imageUrl2;
+  const imageUrl3 = req.body.imageUrl3;
+  const imageUrl4 = req.body.imageUrl4;
+  const relatedProductsBody = [
+    relatedProduct1,
+    relatedProduct2,
+    relatedProduct3,
+    relatedProduct4,
+  ];
+  let relatedProducts = [];
+  for (const p of relatedProductsBody) {
+    if (objectId.isValid(p)) {
+      relatedProducts.push(p);
+    }
   }
-  res.status(200).send(product);
+
+  await Product.findByIdAndUpdate(productId, {
+    name: name,
+    category: category,
+    relatedProduct: relatedProducts,
+    sale: sale,
+    price: price,
+    details: details,
+    imageUrl: [imageUrl1, imageUrl2, imageUrl3, imageUrl4],
+    count: count,
+  });
+
+  res.redirect("/admin/products");
 };
 
 exports.getAddProduct = (req, res, next) => {
@@ -88,7 +110,6 @@ exports.deleteProduct = async (req, res, next) => {
 };
 
 exports.getComments = async (req, res, next) => {
-  console.log("test get comments");
   const products = await Product.find();
   let comments = [];
   for (let product of products) {
@@ -96,8 +117,6 @@ exports.getComments = async (req, res, next) => {
       comments.push({ productId: product._id, comment });
     }
   }
-  console.log(comments);
-  res.send(comments);
 };
 
 exports.getCommentsOfSingleProduct = async (req, res, next) => {

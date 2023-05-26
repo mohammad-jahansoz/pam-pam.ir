@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/admin.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="add-edit-product">
+
+
+    <form action="/admin/product/<%= product._id %>" method="post">
+      <input type="text" name="name" value="<%= product.name %>" placeholder="نام کالا">
+      <input type="number" name="price" value="<%= product.price %>" placeholder="قیمت">
+      <input type="sale" name="sale" value="<%= product.sale %>" placeholder="خاصیت">
+      <input type="number" name="count" value="<%= product.count %>" placeholder="تعداد موجودی">
+      <div class="category-section">
+        <p>دسته بندی</p>
+        <select name="category" id="category" class="category">
+          <option <%= (product.category === "میوه خشک") ? "selected" : "" %> value="میوه خشک">میوه خشک</option>
+          <option <%= (product.category === "چای میوه ای") ? "selected" : "" %> value="چای میوه ای">چای میوه ای</option>
+          <option <%= (product.category === "ادویه") ? "selected" : "" %> value="ادویه">ادویه</option>
+          <option <%= (product.category === "لواشک و ترشی") ? "selected" : "" %> value="لواشک و ترشی">لواشک و ترشی</option>
+          <option <%= (product.category === "پک کادویی") ? "selected" : "" %> value="پک کادویی">پک کادویی</option>
+          <option <%= (product.category === "میوه پفکی") ? "selected" : "" %> value="میوه پفکی">میوه پفکی</option>
+        </select>
+      </div>
+      <input type="text" name="details" value="<%= product.details %>" placeholder="جزئیات">
+      <input type="text" name="relatedProduct1" value="<%= product.relatedProduct[0] %>" placeholder="آی دی کالای مربوط">
+      <input type="text" name="relatedProduct2" value="<%= product.relatedProduct[1] %>" placeholder="آی دی کالای مربوط">
+      <input type="text" name="relatedProduct3" value="<%= product.relatedProduct[2] %>" placeholder="آی دی کالای مربوط">
+      <input type="text" name="relatedProduct4" value="<%= product.relatedProduct[3] %>" placeholder="آی دی کالای مربوط">
+      <input type="text" name="imageUrl1" value="<%= product.imageUrl[0] %>" placeholder="لینک عکس">
+      <input type="text" name="imageUrl2" value="<%= product.imageUrl[1] %>" placeholder="لینک عکس">
+      <input type="text" name="imageUrl3" value="<%= product.imageUrl[2] %>" placeholder="لینک عکس">
+      <input type="text" name="imageUrl4" value="<%= product.imageUrl[3] %>" placeholder="لینک عکس">
+      <button class="btn" type="submit">Edit Post</button>
+    </form>
+  </div>
+</body>
+
+</html>

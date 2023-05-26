@@ -4,9 +4,10 @@ const adminController = require("../controller/admin");
 
 router.get("/products", adminController.getProducts);
 router.get("/addProduct", adminController.getAddProduct);
-router.post("/allProduct", adminController.addProduct);
+router.post("/addProduct", adminController.addProduct);
 router.get("/deleteProduct/:id", adminController.deleteProduct);
-router.put("/api/product/:id", adminController.updateProduct);
+router.post("/product/:id", adminController.postEditProduct);
+router.get("/product/:id", adminController.getEditProduct);
 router.get("/api/products/comments", adminController.getComments);
 router.get(
   "/api/product/comments/:id",

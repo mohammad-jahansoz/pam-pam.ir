@@ -16,8 +16,9 @@
       <img src="<%= product.imageUrl[0] %>" alt="">
       <h4><%= product.name %></h4>
       <p><%= product.price %></p>
-      <a class="btn" href="/admin/deleteProduct/<%= product._id %>">delete</a>
-      <a class="btn" href="#">Edit</a>
+      <a class="btn" href="/admin/deleteProduct/<%= product._id %>">Delete</a>
+      <a class="btn" href="/admin/product/<%= product._id %>">Edit</a>
+      <a href="#">Comments</a>
     </div>
     <% } %>
   </div>
