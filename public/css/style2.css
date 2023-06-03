@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
   font-family: Yekan;
   src: url("../fonts/Yekan.ttf") format("true type");
   src: url("../fonts/Yekan.eot");
@@ -6,7 +6,7 @@
   src: url("../fonts/Yekan.woff") format("woff");
   font-weight: normal;
   font-style: normal;
-}
+} */
 :root {
   --bg-color: #0d0f10;
   /* --bg-color: #343a40; */

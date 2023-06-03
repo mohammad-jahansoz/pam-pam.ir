@@ -117,16 +117,33 @@ exports.getComments = async (req, res, next) => {
       comments.push({ productId: product._id, comment });
     }
   }
-  const commentsSortByArray = comments.sort((a, b) => {
-    return b.comment.createdAt - a.comment.createdAt;
+
+  const commentsSortByDate = comments.sort((a, b) => {
+    return (
+      new Date(b.comment.comment.createdAt) -
+      new Date(a.comment.comment.createdAt)
+    );
   });
-  res.render("admin/getComments", { comments: commentsSortByArray });
+  res.render("admin/getComments", { comments: commentsSortByDate });
 };
 
 exports.getCommentsOfSingleProduct = async (req, res, next) => {
   const productId = req.params.id;
   const product = await Product.findById(productId);
-  res.status(200).send(product.comments);
+  const comments = [];
+  for (const comment of product.comments) {
+    comments.push({ productId: product._id, comment });
+  }
+  const commentsSortByDate = comments.sort((a, b) => {
+    return (
+      new Date(b.comment.comment.createdAt) -
+      new Date(a.comment.comment.createdAt)
+    );
+  });
+
+  res.render("admin/getComments", {
+    comments: commentsSortByDate,
+  });
 };
 
 exports.setReply = async (req, res, next) => {
@@ -135,7 +152,7 @@ exports.setReply = async (req, res, next) => {
   const comment = req.body.comment;
   const reply = req.body.reply;
   console.log(reply);
-  const product = await Product.updateOne(
+  await Product.updateOne(
     {
       _id: new objectId(productId),
       "comments._id": new objectId(commentId),
@@ -147,7 +164,7 @@ exports.setReply = async (req, res, next) => {
       },
     }
   );
-  console.log(product);
+
   res.redirect("/admin/products/comments");
 };
 
@@ -172,7 +189,6 @@ exports.getProducts = async (req, res, next) => {
 
 exports.searchOrder = async (req, res, next) => {
   const searchedText = req.body.searchedText;
-
   if (typeof searchedText === "string") {
     const order = await Order.find({
       $text: { $search: searchedText },
@@ -186,6 +202,12 @@ exports.searchOrder = async (req, res, next) => {
     console.log(order);
     res.send(order);
   }
+};
+
+exports.getOrders = async (req, res, next) => {
+  const orders = await Order.find();
+
+  res.render("admin/orders", { orders });
 };
 
 exports.getSignIn = (req, res, next) => {

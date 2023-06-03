@@ -10,7 +10,7 @@ router.post("/product/:id", adminController.postEditProduct);
 router.get("/product/:id", adminController.getEditProduct);
 router.get("/products/comments", adminController.getComments);
 router.get(
-  "/api/product/comments/:id",
+  "/product/comments/:id",
 
   adminController.getCommentsOfSingleProduct
 );
@@ -19,6 +19,7 @@ router.post(
 
   adminController.setReply
 );
+router.get("/orders", adminController.getOrders);
 router.get(
   "/product/comment/:productId/:commentId",
   adminController.deleteComment

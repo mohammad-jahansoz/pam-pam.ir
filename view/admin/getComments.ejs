@@ -16,8 +16,8 @@
     <% for(const comment of comments){ %>
     <div style="border: 1px solid green; border-radius: 2rem; padding: 1rem;">
       <form method="post" action="/admin/product/comment/<%= comment.productId %>/<%= comment.comment._id %>" style="display: flex; flex-direction: column; gap: 3px;">
-        <textarea style="resize: vertical;font-family: Yekan; padding: 0.5rem; border-radius: 2rem;" type="text" name="comment"><%= comment.comment.comment.comment %></textarea>
-        <textarea style="resize: vertical;font-family: Yekan; padding: 0.5rem; border-radius: 2rem;" type="text" placeholder="بدون پاسخ" name="reply"><%= comment.comment.reply %></textarea>
+        <textarea style=" overflow: hidden; resize: vertical;font-family: Yekan; padding: 0.5rem; border-radius: 2rem;" type="text" name="comment"><%= comment.comment.comment.comment %></textarea>
+        <textarea style=" overflow: hidden; resize: vertical;font-family: Yekan; padding: 0.5rem; border-radius: 2rem;" type="text" placeholder="بدون پاسخ" name="reply"><%= comment.comment.reply %></textarea>
         <input type="submit" id="submit-form" style="display: none;" />
         <button class="btn" type="submit">update</button>
       </form>

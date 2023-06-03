@@ -1,14 +1,18 @@
 @font-face {
   font-family: Yekan;
   src: url("../fonts/Yekan.ttf") format("true type");
-  src: url("../fonts/Yekan.eot");
-  src: url("../fonts/Yekan.eot?#iefix") format("Yekan-opentype");
-  src: url("../fonts/Yekan.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
+}
+@font-face {
+  font-family: Vazir;
+  src: url("../fonts/Vazir.eot"),
+    url("../fonts/Vazir.eot?#iefix") format("Yekan-opentype"),
+    url("../fonts/Vazir.woff") format("woff");
+}
+* {
+  text-decoration: none;
 }
 body {
-  font-family: Yekan;
+  font-family: Vazir;
   background: linear-gradient(#141e30, #243b55);
 }
 input {
@@ -230,4 +234,117 @@ input {
   border-radius: 2rem;
   background-color: green;
   color: white;
+}
+
+.orders-parent-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .orders-parent-container {
+    grid-template-columns: 1fr !important;
+  }
+  .orders-container {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .orders-container {
+    width: 95%;
+  }
+}
+
+@media (max-width: 1100px) {
+  .orders-container div ul li {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.orders-container table {
+  width: 100%;
+  list-style: none;
+}
+
+.orders-container ul {
+  list-style: none;
+}
+
+/*  */
+
+.modal {
+  display: none;
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+
+  width: 100%;
+}
+
+.modal:target {
+  display: table;
+}
+.modal__dialog {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal__content {
+  background: rgb(255, 255, 255);
+  width: 60%;
+  min-width: 300px;
+  margin: auto;
+  position: relative;
+
+  animation: slideUp 0.3s ease-in-out;
+}
+
+.modal__header {
+  background: green;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 1rem;
+  position: relative;
+}
+.modal__title {
+  margin: 0;
+}
+.modal__close {
+  color: #fff;
+  text-decoration: none;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+.modal__image {
+  display: block;
+  margin: 1rem auto;
+}
+.modal__text {
+  padding: 0 1rem;
+  line-height: 1.5;
+}
+.modal__footer {
+  padding: 1rem;
+  border-top: 1px solid #ccc;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    bottom: -200px;
+  }
+  to {
+    opacity: 1;
+    bottom: 0;
+  }
+}
+
+.modal__body div p {
+  color: black !important;
 }

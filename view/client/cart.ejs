@@ -36,9 +36,9 @@
   </table>
   <div>
     <span>
-      <h4>جمع قیمت محصولات : <%= totalPrice %></h4>
-      <h4>هزینه ارسال : 35000</h4>
-      <h4>هزینه نهایی : <%= totalPrice + 35000 %></h4>
+      <h4>جمع قیمت محصولات : <%= totalPrice.toLocaleString('fa') %></h4>
+      <h4>هزینه ارسال : 35,000</h4>
+      <h4>هزینه نهایی : <%= (totalPrice + 35000).toLocaleString('fa') %></h4>
     </span>
     <a href="/api/user/getOrderForm" class="btn">ادامه فرایند خرید</a>
   </div>

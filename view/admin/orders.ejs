@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/admin.css">
+  <title>Admin of pam-pam</title>
+</head>
+
+<body>
+  <div class="orders-parent-container" style="color: white; display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 1rem;">
+    <% for (const order of orders) { %>
+    <div class="orders-container">
+      <h2 style="color: <%= (order.status === 1) ? 'red' : 'green' %>; margin: auto; width: 10rem; text-align: center; background-color: black; padding: 0.7rem; border: 2px solid <%= (order.status === 1) ? 'red' : 'green' %>; font-size: 1rem; border-radius: 2rem 2rem 0 0; border-bottom: 0;">
+        <%= (order.status === 1) ? 'پرداخت ناموفق' : 'پرداخت موفق' %>
+      </h2>
+      <div style="background-color: black; border: 2px solid <%= (order.status === 1) ? 'red' : 'green' %>; border-radius: 2rem;">
+        <ul style=" border-bottom: 1px solid <%= (order.status === 1) ? 'red' : 'green' %>; display: flex; padding: 1rem; align-items: center; justify-content: space-between; text-align: center;">
+          <li>
+            <span>
+              تاریخ:
+            </span>
+            <span>
+              <%= order.createdAt.toLocaleString("fa").toLocaleString('fa-IR-u-nu-latn').split(',',1) %>
+            </span>
+          </li>
+          <li>
+            <span>
+              کد رهگیری:
+            </span>
+            <span>
+              <%= order.paymentInfo.shopTrackingCode.toString().substring(3, 6) %> - <%= order.paymentInfo.shopTrackingCode.toString().substring(0,3) %>
+            </span>
+          </li>
+          <li>
+            <span>
+              شناسه پراخت:
+            </span>
+            <span style="color: <%= (order.status === 1) ? 'red' : '' %>;">
+              <%= (order.status === 1) ? 'ناموفق' : order.paymentInfo.bankTrackingCode %>
+            </span>
+          </li>
+        </ul>
+        <table style="text-align: center;">
+          <tr>
+            <td> نام خریدار : <%= order.user.name %> </td>
+            <td style="text-align: center !important;"> قیمت کل : <%= order.paymentInfo.totalPrice %> </td>
+          </tr>
+          <tr>
+            <td><%= (order.status === 0) ? "لغو شده" : (order.status === 1 ) ? "پرداخت نشده" : (order.status === 2) ? "در انتظار بسته بندی" : (order.status === 3) ? "در انتظار پست"  : (order.status === 4) ? "ارسال شده" : "وضعیت نامعلوم" %></td>
+            <td style="text-align: center !important;"><%= (order.status === 4 ) ? order.paymentInfo.postTrackingCode : "ارسال نشده" %></td>
+
+          </tr>
+        </table>
+        <span style="display: flex; text-align: center; gap: 2px; ">
+          <a href="#modal" class="modal-trigger" style=" border-radius: 0 0 1.8rem 0; width: 100%; display: block; background-color: <%= (order.status === 1) ? 'red' : 'green' %>;">جزئیات</a>
+
+          <div class="modal" id="modal">
+            <div class="modal__dialog">
+              <section class="modal__content">
+                <header class="modal__header">
+                  <h2 class="modal__title">جزئیات سفارش <%= order.user.name %></h2>
+                  <a href="#" class="modal__close">&times;</a>
+                </header>
+                <div class="modal__body">
+                  <img src="https://placehold.it/200x100" alt="modal image" class="modal__image">
+                  <div style="color: black;">
+                    <p>گیرنده : <%= order.user.name %></p>
+                    <p>شماره تماس : <%= order.user.phoneNumber %></p>
+                    <p>آدرس : <%- order.user.address.province + "-" + order.user.address.city + "-" + order.user.address.address  + "." + "      ک.پ        " + order.user.address.postCode %> </p>
+                  </div>
+                </div>
+                <footer class="modal__footer">
+                  <!-- <a href="https://facebook.com/kumaramit24chd" class="modal__link">follow me</a> -->
+                </footer>
+              </section>
+            </div>
+          </div>
+          <a href="<%= (order.status !== 4) ? "#" : "/" %>" style=" border-radius: 0 0 0 1.8rem; width: 100%; display: block; background-color: <%= (order.status === 1) ? 'red' : 'green' %>; <%= (order.status < 4) ? "cursor: not-allowed;" : "" %> ">پیگیری مرسوله</a>
+
+
+        </span>
+      </div>
+    </div>
+    <% } %>
+</body>
+
+</html>
