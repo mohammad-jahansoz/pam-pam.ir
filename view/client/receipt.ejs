@@ -58,10 +58,7 @@
           <img src="/images/logo-white.png" alt="" style="width: 12rem; ">
           <h4>فروشگاه اینترنتی پَم پَم</h4>
         </span>
-
-
       </div>
-
       <div style="display: block;
     padding: 1rem;
     border-bottom: 1px solid <%- (receipt.status === 100 || receipt.status === 101) ? "green" : "red" %>;">
@@ -76,7 +73,7 @@
       </div>
     </div>
   </div>
-  <a href="/api/user/getOrderForm" class="btn" style="    display: flex; width: 16rem;margin: 2rem auto; justify-content: space-around;
+  <a href="/api/user/downloadReceipt/<%= order._Id %>" class="btn" style="display: flex; width: 16rem;margin: 2rem auto; justify-content: space-around;
       align-items: center; background-color: <%- (receipt.status === 100 || receipt.status === 101) ? "green" : "red !important" %>;
       gap: 1rem;">دانلود فاکتور <i class='bx bxs-cart-download' style="font-size: 1.6rem;"></i></a>
 

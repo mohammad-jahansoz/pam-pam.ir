@@ -217,7 +217,6 @@ exports.getSignIn = (req, res, next) => {
 exports.postEditOrder = async (req, res, next) => {
   const orderId = req.params.orderId;
   const { postTrackingCode, status } = req.body;
-  console.log(postTrackingCode + status);
   await Order.findByIdAndUpdate(orderId, {
     $set: {
       status: status,

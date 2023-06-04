@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/boxicons/css/boxicons.css" />
   <title>Admin of pam-pam</title>
 </head>
 
@@ -74,7 +75,18 @@
           </tr>
         </table>
         <span style="display: flex; text-align: center; gap: 2px; ">
-          <a href="/admin/order/<%= order._id %>" style="color: black; border-radius: 0 0 1.8rem 0; width: 100%; display: block; background-color: <%= (order.status === 1) ? 'red' : 'green' %>;">جزئیات</a>
+          <a href="/admin/order/<%= order._id %>" style="color: black;
+            border-radius: 0 0 1.8rem 0;
+            width: 100%;
+            align-items: center;
+            display: flex;
+            background-color: <%= (order.status === 1) ? 'red' : 'green' %>;
+            justify-content: center;">
+            جزئیات
+            <% if(order.note){ %>
+            <i class='bx bxs-message-alt-edit'></i>
+            <% } %>
+          </a>
           <button type="submit" form="<%= order.paymentInfo.shopTrackingCode %>" style="cursor: pointer; border: none; font-family: Vazir ;   width: 80%; display: block; background-color: <%= (order.status === 1) ? 'red' : 'green' %>;  ">آپدیت</button>
           <a href="<%= (order.status !== 4) ? "#" : "/" %>" style=" border-radius: 0 0 0 1.8rem; width: 100%; display: block; background-color: <%= (order.status === 1) ? 'red' : 'green' %>; <%= (order.status < 4) ? "cursor: not-allowed;" : "" %> color:black">پیگیری مرسوله</a>
         </span>
