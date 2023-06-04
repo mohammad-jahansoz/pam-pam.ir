@@ -206,8 +206,8 @@ exports.searchOrder = async (req, res, next) => {
 
 exports.getOrders = async (req, res, next) => {
   const orders = await Order.find();
-
-  res.render("admin/orders", { orders });
+  // console.log(orders);
+  res.render("admin/orders", { orders: orders });
 };
 
 exports.getSignIn = (req, res, next) => {

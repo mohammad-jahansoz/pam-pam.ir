@@ -13,7 +13,7 @@
   <div class="orders-parent-container" style="color: white; display: grid;
   grid-template-columns: repeat(4,1fr);
   gap: 1rem;">
-    <% for (const order of orders) { %>
+    <% orders.forEach(function(order){ %>
     <div class="orders-container">
       <h2 style="color: <%= (order.status === 1) ? 'red' : 'green' %>; margin: auto; width: 10rem; text-align: center; background-color: black; padding: 0.7rem; border: 2px solid <%= (order.status === 1) ? 'red' : 'green' %>; font-size: 1rem; border-radius: 2rem 2rem 0 0; border-bottom: 0;">
         <%= (order.status === 1) ? 'پرداخت ناموفق' : 'پرداخت موفق' %>
@@ -51,42 +51,37 @@
             <td style="text-align: center !important;"> قیمت کل : <%= order.paymentInfo.totalPrice %> </td>
           </tr>
           <tr>
-            <td><%= (order.status === 0) ? "لغو شده" : (order.status === 1 ) ? "پرداخت نشده" : (order.status === 2) ? "در انتظار بسته بندی" : (order.status === 3) ? "در انتظار پست"  : (order.status === 4) ? "ارسال شده" : "وضعیت نامعلوم" %></td>
-            <td style="text-align: center !important;"><%= (order.status === 4 ) ? order.paymentInfo.postTrackingCode : "ارسال نشده" %></td>
-
+            <td>
+              <form action="/admin/orders/<%= order._id %>" method="post" id="<%= order.paymentInfo.shopTrackingCode %>">
+                <div class="category-section">
+                  <select name="category" id="category" class="category">
+                    <option <%= (order.status=== 0) ? "selected" : "" %> value="0">لغو شده</option>
+                    <option <%= (order.status=== 1) ? "selected" : "" %> value="1">پرداخت نشده</option>
+                    <option <%= (order.status=== 2) ? "selected" : "" %> value="2">در انتظار بسته بندی</option>
+                    <option <%= (order.status=== 3) ? "selected" : "" %> value="3">در انتظار پست</option>
+                    <option <%= (order.status=== 4) ? "selected" : "" %> value="4">ارسال شده</option>
+                  </select>
+                </div>
+              </form>
+            </td>
+            <% if(order.status === 4 ){ %>
+            <td>
+              <input type="text" form="<%= order.paymentInfo.shopTrackingCode %>" value="<%= order.paymentInfo.postTrackingCode %>" name="postTrackingCode" placeholder="کد مرسوله" style="width: 90%;border-radius: 2rem; direction: ltr;">
+            </td>
+            <% }else{ %>
+            <td style="text-align: center !important;">ارسال نشده</td>
+            <% } %>
           </tr>
         </table>
         <span style="display: flex; text-align: center; gap: 2px; ">
           <a href="#modal" class="modal-trigger" style=" border-radius: 0 0 1.8rem 0; width: 100%; display: block; background-color: <%= (order.status === 1) ? 'red' : 'green' %>;">جزئیات</a>
-
-          <div class="modal" id="modal">
-            <div class="modal__dialog">
-              <section class="modal__content">
-                <header class="modal__header">
-                  <h2 class="modal__title">جزئیات سفارش <%= order.user.name %></h2>
-                  <a href="#" class="modal__close">&times;</a>
-                </header>
-                <div class="modal__body">
-                  <img src="https://placehold.it/200x100" alt="modal image" class="modal__image">
-                  <div style="color: black;">
-                    <p>گیرنده : <%= order.user.name %></p>
-                    <p>شماره تماس : <%= order.user.phoneNumber %></p>
-                    <p>آدرس : <%- order.user.address.province + "-" + order.user.address.city + "-" + order.user.address.address  + "." + "      ک.پ        " + order.user.address.postCode %> </p>
-                  </div>
-                </div>
-                <footer class="modal__footer">
-                  <!-- <a href="https://facebook.com/kumaramit24chd" class="modal__link">follow me</a> -->
-                </footer>
-              </section>
-            </div>
-          </div>
+          <button type="submit" form="<%= order.paymentInfo.shopTrackingCode %>" style="border: none; font-family: Vazir ;   width: 80%; display: block; background-color: <%= (order.status === 1) ? 'red' : 'green' %>;  ">آپدیت</button>
           <a href="<%= (order.status !== 4) ? "#" : "/" %>" style=" border-radius: 0 0 0 1.8rem; width: 100%; display: block; background-color: <%= (order.status === 1) ? 'red' : 'green' %>; <%= (order.status < 4) ? "cursor: not-allowed;" : "" %> ">پیگیری مرسوله</a>
-
-
         </span>
       </div>
     </div>
-    <% } %>
+    <% }) %>
+  </div>
 </body>
 
 </html>
