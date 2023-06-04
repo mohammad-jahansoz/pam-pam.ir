@@ -74,9 +74,9 @@
           </tr>
         </table>
         <span style="display: flex; text-align: center; gap: 2px; ">
-          <a href="#modal" class="modal-trigger" style=" border-radius: 0 0 1.8rem 0; width: 100%; display: block; background-color: <%= (order.status === 1) ? 'red' : 'green' %>;">جزئیات</a>
+          <a href="/admin/order/<%= order._id %>" style="color: black; border-radius: 0 0 1.8rem 0; width: 100%; display: block; background-color: <%= (order.status === 1) ? 'red' : 'green' %>;">جزئیات</a>
           <button type="submit" form="<%= order.paymentInfo.shopTrackingCode %>" style="cursor: pointer; border: none; font-family: Vazir ;   width: 80%; display: block; background-color: <%= (order.status === 1) ? 'red' : 'green' %>;  ">آپدیت</button>
-          <a href="<%= (order.status !== 4) ? "#" : "/" %>" style=" border-radius: 0 0 0 1.8rem; width: 100%; display: block; background-color: <%= (order.status === 1) ? 'red' : 'green' %>; <%= (order.status < 4) ? "cursor: not-allowed;" : "" %> ">پیگیری مرسوله</a>
+          <a href="<%= (order.status !== 4) ? "#" : "/" %>" style=" border-radius: 0 0 0 1.8rem; width: 100%; display: block; background-color: <%= (order.status === 1) ? 'red' : 'green' %>; <%= (order.status < 4) ? "cursor: not-allowed;" : "" %> color:black">پیگیری مرسوله</a>
         </span>
       </div>
     </div>
