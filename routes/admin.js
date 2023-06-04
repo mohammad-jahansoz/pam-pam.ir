@@ -26,5 +26,7 @@ router.get(
 );
 router.post("/api/order/search", adminController.searchOrder);
 router.get("/signin", adminController.getSignIn);
+router.post("/orders/:orderId", adminController.postEditOrder);
+router.get("/order/:orderId", adminController.getOrder);
 
 module.exports = router;

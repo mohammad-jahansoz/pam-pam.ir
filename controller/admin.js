@@ -213,3 +213,22 @@ exports.getOrders = async (req, res, next) => {
 exports.getSignIn = (req, res, next) => {
   res.render("admin/signIn");
 };
+
+exports.postEditOrder = async (req, res, next) => {
+  const orderId = req.params.orderId;
+  const { postTrackingCode, status } = req.body;
+  console.log(postTrackingCode + status);
+  await Order.findByIdAndUpdate(orderId, {
+    $set: {
+      status: status,
+      "paymentInfo.postTrackingCode": postTrackingCode,
+    },
+  });
+  res.redirect("/admin/orders");
+};
+
+exports.getOrder = async (req, res, next) => {
+  const orderId = req.params.orderId;
+  const order = await Order.findById(orderId);
+  res.render("admin/order", { order });
+};
