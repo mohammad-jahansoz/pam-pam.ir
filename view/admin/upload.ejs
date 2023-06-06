@@ -1,12 +1,12 @@
 <%- include('./includes/head') -%>
 <%- include('./includes/header') -%>
-<form action="/admin/upload" method="POST" enctype="multipart/form-data">
-  <select name="type" class="type_upload">
+<form action="/admin/upload" method="POST" class="upload_form" enctype="multipart/form-data">
+  <select name="type">
     <option value="images">عکس</option>
     <option value="videos">فیلم</option>
     <option value="voices">صدا</option>
   </select>
-  <input type="file" name="file">
+  <input type="file" multiple="true" name="files">
   <button type="submit">ارسال</button>
 </form>
 

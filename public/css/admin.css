@@ -304,3 +304,52 @@ header a {
   justify-content: center;
   display: flex;
 }
+
+.upload_form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 50%;
+  flex-direction: column;
+  top: 50%;
+  transform: translate(50%, -50%);
+  width: 50rem;
+  background-color: black;
+  border: 2px solid green;
+  border-radius: 2rem;
+  padding: 1rem;
+  gap: 2rem;
+}
+
+.upload_form select {
+  background-color: black;
+  color: green;
+  padding: 5px;
+  border: 1px solid green;
+  border-radius: 2rem;
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+  font-family: vazir;
+}
+
+.upload_form button {
+  border: 1px solid green;
+  border-radius: 2rem;
+  padding: 1rem;
+  font-size: 1.5rem;
+  font-family: vazir;
+  background-color: black;
+  color: green;
+  width: 100%;
+}
+
+.upload_form input {
+  background-color: black;
+  color: green;
+  border: 2px solid;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 2rem;
+}

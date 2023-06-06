@@ -50,7 +50,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.get("/receipt", userController.designOrder);
 app.use(productsRoutes);
 app.use(authRoutes);
 app.use(general);

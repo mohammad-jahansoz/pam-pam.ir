@@ -238,7 +238,10 @@ exports.getUpload = (req, res, next) => {
 };
 
 exports.postUpload = async (req, res, next) => {
-  const upload = new Upload({ url: "/" + req.file.path, type: req.body.type });
-  await upload.save();
+  let files = [];
+  for (f of req.files) {
+    files.push({ url: "/" + f.path, type: req.body.type });
+  }
+  await Upload.insertMany(files);
   res.redirect("/admin/upload");
 };

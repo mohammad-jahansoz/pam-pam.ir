@@ -2,4 +2,6 @@ node_modules
 .env
 remember.txt
 uncaughtExceptions.log
-public/images
+public/upload/videos/*
+public/upload/voices/*
+public/upload/images/*
