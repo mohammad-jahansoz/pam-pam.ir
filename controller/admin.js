@@ -3,7 +3,7 @@ const objectId = mongoose.Types.ObjectId;
 const Product = require("../models/product");
 const User = require("../models/user");
 const Order = require("../models/order");
-const multer = require("multer");
+const Upload = require("../models/uploads");
 
 exports.getEditProduct = async (req, res, next) => {
   const productId = req.params.id;
@@ -238,10 +238,7 @@ exports.getUpload = (req, res, next) => {
 };
 
 exports.postUpload = async (req, res, next) => {
-  try {
-    console.log(req.body);
-    console.log(req.file);
-  } catch (err) {
-    console.log(err);
-  }
+  const upload = new Upload({ url: "/" + req.file.path, type: req.body.type });
+  await upload.save();
+  res.redirect("/admin/upload");
 };

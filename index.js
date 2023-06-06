@@ -21,6 +21,10 @@ const general = require("./controller/general");
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  "/public/upload/",
+  express.static(path.join(__dirname, "public", "upload"))
+);
 app.set("view engine", "ejs");
 app.set("views", "view");
 app.use(bodyParser.urlencoded({ extended: true }));
