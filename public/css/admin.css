@@ -275,3 +275,32 @@ input {
 }
 
 /*  */
+
+header {
+  background-color: black;
+  padding: 5px;
+  border: 2px solid green;
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+}
+
+header a {
+  color: green;
+}
+
+.plus {
+  color: green;
+  background-color: black;
+  padding: 8px;
+  border-radius: 50%;
+  border: 2px solid green;
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}

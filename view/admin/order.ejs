@@ -1,116 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('./includes/head') -%>
+<%- include('./includes/header') -%>
+<div class="small-container" style="color: white; font-family: Yekan; direction: rtl; margin-top: 8rem; margin-bottom: 8rem; ">
+  <h2 style="color: <%- (order.status > 1 ) ? "green" : "red" %>;margin: auto; width: 10rem; text-align: center; background-color: black; padding: 0.7rem; border: 2px solid <%- (order.status > 1 ) ? "green" : "red" %>;font-size: 1rem; border-radius: 2rem 2rem 0 0; border-bottom:0"><%- (order.status > 1 ) ? "پرداخت موفق" : "پرداخت ناموفق" %></h2>
+  <div style="  border: 2px solid <%- (order.status > 1 ) ? "green" : "red" %> ;border-radius: 2rem;">
+    <ul style="display: flex;padding: 1rem; align-items: center; justify-content: space-between; text-align: center;">
+      <li>
+        تاریخ : <%= order.createdAt.toLocaleString("fa").toLocaleString('fa-IR-u-nu-latn').split(',',1) %>
+      </li>
+      <li>
+        کد رهگیری : <%- order.paymentInfo.shopTrackingCode.toString().substring(3, 6) %> - <%- order.paymentInfo.shopTrackingCode.toString().substring(0,3) %>
+      </li>
+      <li style="color: <%- (order.status > 1 ) ? "" : "red" %>;">
+        شناسه پراخت : <%- (order.status > 1 ) ? order.paymentInfo.bankTrackingCode : "ناموفق" %>
+      </li>
+    </ul>
+    <div class=" cart-page " style="margin: 0 !important; margin: 90px auto;">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= order.user.name %></title>
-  <link rel="stylesheet" href="/css/admin.css">
-</head>
-
-<body>
-  <div class="small-container" style="color: white; font-family: Yekan; direction: rtl; margin-top: 8rem; margin-bottom: 8rem; ">
-    <h2 style="color: <%- (order.status > 1 ) ? "green" : "red" %>;margin: auto; width: 10rem; text-align: center; background-color: black; padding: 0.7rem; border: 2px solid <%- (order.status > 1 ) ? "green" : "red" %>;font-size: 1rem; border-radius: 2rem 2rem 0 0; border-bottom:0"><%- (order.status > 1 ) ? "پرداخت موفق" : "پرداخت ناموفق" %></h2>
-    <div style="  border: 2px solid <%- (order.status > 1 ) ? "green" : "red" %> ;border-radius: 2rem;">
-      <ul style="display: flex;padding: 1rem; align-items: center; justify-content: space-between; text-align: center;">
-        <li>
-          تاریخ : <%= order.createdAt.toLocaleString("fa").toLocaleString('fa-IR-u-nu-latn').split(',',1) %>
-        </li>
-        <li>
-          کد رهگیری : <%- order.paymentInfo.shopTrackingCode.toString().substring(3, 6) %> - <%- order.paymentInfo.shopTrackingCode.toString().substring(0,3) %>
-        </li>
-        <li style="color: <%- (order.status > 1 ) ? "" : "red" %>;">
-          شناسه پراخت : <%- (order.status > 1 ) ? order.paymentInfo.bankTrackingCode : "ناموفق" %>
-        </li>
-      </ul>
-      <div class=" cart-page " style="margin: 0 !important; margin: 90px auto;">
-
-        <table style="width: 100%;
+      <table style="width: 100%;
             border-collapse: collapse;">
-          <thead>
+        <thead>
 
-            <tr>
-              <th style=" text-align: right;
+          <tr>
+            <th style=" text-align: right;
               padding: 5px;
               
               background: #ff523b;
               font-weight: normal; background-color: <%- (order.status > 1 ) ? "green" : "red" %>;">
-                نام محصول
-              </th>
-              <th style=" text-align: right;
+              نام محصول
+            </th>
+            <th style=" text-align: right;
               padding: 5px;
               
               
               font-weight: normal; background-color: <%- (order.status > 1 ) ? "green" : "red" %>;">
-                قیمت * تعداد
-              </th>
-              <th style=" text-align: right;
+              قیمت * تعداد
+            </th>
+            <th style=" text-align: right;
               padding: 5px;
               
               
               font-weight: normal; background-color: <%- (order.status > 1 ) ? "green" : "red" %>;">
-                قیمت کل
-              </th>
-            </tr>
+              قیمت کل
+            </th>
+          </tr>
 
-          </thead>
-          <tbody>
+        </thead>
+        <tbody>
 
-            <% for(const product of order.products) { %>
+          <% for(const product of order.products) { %>
 
-            <tr>
-              <td style="padding: 10px 5px;
+          <tr>
+            <td style="padding: 10px 5px;
               ">
-                <a href="/api/product/getProduct/<%= product.productId._id %>" style="color: white; display: flex;
+              <a href="/api/product/getProduct/<%= product.productId._id %>" style="color: white; display: flex;
                   flex-wrap: wrap;" class="cart-info ">
-                  <p><%= product.productId.name %></p>
-                </a>
-              </td>
-              <td style="padding: 10px 5px;
+                <p><%= product.productId.name %></p>
+              </a>
+            </td>
+            <td style="padding: 10px 5px;
               "><%= product.productId.price %> * <%= product.quantity %></td>
-              <td style="padding: 10px 5px;
+            <td style="padding: 10px 5px;
               "><%= product.productId.price * product.quantity %></td>
 
-            </tr>
+          </tr>
 
-            <%   } %>
+          <%   } %>
 
-          </tbody>
-        </table>
-        <div style=" display: flex; align-items: center; justify-content: space-between !important; padding: 1rem; border-top: 1px solid <%- (order.status > 1 ) ? "green" : "red" %>;">
-          <span>
-            <h4>جمع قیمت محصولات : <%- order.paymentInfo.totalPrice - 35000 %></h4>
-            <h4>هزینه ارسال : 35000</h4>
-            <h4>هزینه نهایی : <%- order.paymentInfo.totalPrice %></h4>
-          </span>
-          <span style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-            <img src="http://localhost:3000/images/logo.png" alt="" style="width: 250px; height: 200px; ">
-            <h4>فروشگاه اینترنتی پَم پَم</h4>
-            <h4>www.pam-pam.ir</h4>
-          </span>
+        </tbody>
+      </table>
+      <div style=" display: flex; align-items: center; justify-content: space-between !important; padding: 1rem; border-top: 1px solid <%- (order.status > 1 ) ? "green" : "red" %>;">
+        <span>
+          <h4>جمع قیمت محصولات : <%- order.paymentInfo.totalPrice - 35000 %></h4>
+          <h4>هزینه ارسال : 35000</h4>
+          <h4>هزینه نهایی : <%- order.paymentInfo.totalPrice %></h4>
+        </span>
+        <span style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+          <img src="http://localhost:3000/images/logo.png" alt="" style="width: 250px; height: 200px; ">
+          <h4>فروشگاه اینترنتی پَم پَم</h4>
+          <h4>www.pam-pam.ir</h4>
+        </span>
 
 
-        </div>
+      </div>
 
-        <h3>یادداشت کاربر : <%= order.note %></h3>
-        <div style="display: block;
+      <h3>یادداشت کاربر : <%= order.note %></h3>
+      <div style="display: block;
       padding: 1rem;
       border-bottom: 1px solid <%- (order.status > 1 ) ? "green" : "red" %>;">
-          <p>گیرنده : <%= order.user.name %></p>
-          <p>شماره تماس : <%= order.user.phoneNumber %></p>
-          <p>آدرس : <%- order.user.address.province + "-" + order.user.address.city + "-" + order.user.address.address  + "." + "      ک.پ        " + order.user.address.postCode %> </p>
-        </div>
+        <p>گیرنده : <%= order.user.name %></p>
+        <p>شماره تماس : <%= order.user.phoneNumber %></p>
+        <p>آدرس : <%- order.user.address.province + "-" + order.user.address.city + "-" + order.user.address.address  + "." + "      ک.پ        " + order.user.address.postCode %> </p>
+      </div>
 
-        <div style="padding: 0.5rem; font-size: 14px; display: flex; align-items: center; justify-content: space-around;">
-          <h4>ارسال رایگان سفارش بالای 400 هزار تومان</h4>
-          <H4>تحویل محصول حداکثر 4 روز کاری پس از پرداخت</H4>
-        </div>
+      <div style="padding: 0.5rem; font-size: 14px; display: flex; align-items: center; justify-content: space-around;">
+        <h4>ارسال رایگان سفارش بالای 400 هزار تومان</h4>
+        <H4>تحویل محصول حداکثر 4 روز کاری پس از پرداخت</H4>
       </div>
     </div>
-
-
   </div>
-</body>
 
-</html>
+
+</div>
+
+<%- include('./includes/footer') -%>

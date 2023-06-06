@@ -1,47 +1,36 @@
-<!DOCTYPE html>
-<html lang="en" dir="rtl">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/admin.css">
-  <title>Document</title>
-</head>
-
-<body>
-  <div class="add-edit-product">
+<%- include('./includes/head') -%>
+<%- include('./includes/header') -%>
+<div class="add-edit-product">
 
 
-    <form action="/admin/addProduct" method="post">
-      <input type="text" name="name" placeholder="نام کالا">
-      <input type="number" name="price" placeholder="قیمت">
-      <input type="sale" name="sale" placeholder="خاصیت">
-      <input type="number" name="count" placeholder="تعداد موجودی">
-      <div class="category-section">
-        <p>دسته بندی</p>
-        <select name="category" id="category" class="category">
-          <option value="میوه خشک">میوه خشک</option>
-          <option value="چای میوه ای">چای میوه ای</option>
-          <option value="ادویه">ادویه</option>
-          <option value="لواشک و ترشی">لواشک و ترشی</option>
-          <option value="پک کادویی">پک کادویی</option>
-          <option value="میوه پفکی">میوه پفکی</option>
-        </select>
-      </div>
-      <input type="text" name="details" placeholder="جزئیات">
+  <form action="/admin/addProduct" method="post">
+    <input type="text" name="name" placeholder="نام کالا">
+    <input type="number" name="price" placeholder="قیمت">
+    <input type="sale" name="sale" placeholder="خاصیت">
+    <input type="number" name="count" placeholder="تعداد موجودی">
+    <div class="category-section">
+      <p>دسته بندی</p>
+      <select name="category" id="category" class="category">
+        <option value="میوه خشک">میوه خشک</option>
+        <option value="چای میوه ای">چای میوه ای</option>
+        <option value="ادویه">ادویه</option>
+        <option value="لواشک و ترشی">لواشک و ترشی</option>
+        <option value="پک کادویی">پک کادویی</option>
+        <option value="میوه پفکی">میوه پفکی</option>
+      </select>
+    </div>
+    <input type="text" name="details" placeholder="جزئیات">
 
-      <input type="text" name="relatedProduct1" placeholder="آی دی کالای مربوط">
-      <input type="text" name="relatedProduct2" placeholder="آی دی کالای مربوط">
-      <input type="text" name="relatedProduct3" placeholder="آی دی کالای مربوط">
-      <input type="text" name="relatedProduct4" placeholder="آی دی کالای مربوط">
-      <input type="text" name="imageUrl1" placeholder="لینک عکس">
-      <input type="text" name="imageUrl2" placeholder="لینک عکس">
-      <input type="text" name="imageUrl3" placeholder="لینک عکس">
-      <input type="text" name="imageUrl4" placeholder="لینک عکس">
-      <button class="btn" type="submit">create Post</button>
-    </form>
-  </div>
-</body>
+    <input type="text" name="relatedProduct1" placeholder="آی دی کالای مربوط">
+    <input type="text" name="relatedProduct2" placeholder="آی دی کالای مربوط">
+    <input type="text" name="relatedProduct3" placeholder="آی دی کالای مربوط">
+    <input type="text" name="relatedProduct4" placeholder="آی دی کالای مربوط">
+    <input type="text" name="imageUrl1" placeholder="لینک عکس">
+    <input type="text" name="imageUrl2" placeholder="لینک عکس">
+    <input type="text" name="imageUrl3" placeholder="لینک عکس">
+    <input type="text" name="imageUrl4" placeholder="لینک عکس">
+    <button class="btn" type="submit">create Post</button>
+  </form>
+</div>
 
-</html>
+<%- include('./includes/footer') -%>
