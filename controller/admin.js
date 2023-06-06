@@ -3,6 +3,7 @@ const objectId = mongoose.Types.ObjectId;
 const Product = require("../models/product");
 const User = require("../models/user");
 const Order = require("../models/order");
+const multer = require("multer");
 
 exports.getEditProduct = async (req, res, next) => {
   const productId = req.params.id;
@@ -230,4 +231,17 @@ exports.getOrder = async (req, res, next) => {
   const orderId = req.params.orderId;
   const order = await Order.findById(orderId);
   res.render("admin/order", { order });
+};
+
+exports.getUpload = (req, res, next) => {
+  res.render("admin/upload");
+};
+
+exports.postUpload = async (req, res, next) => {
+  try {
+    console.log(req.body);
+    console.log(req.file);
+  } catch (err) {
+    console.log(err);
+  }
 };

@@ -1,0 +1,12 @@
+<%- include('./includes/head') -%>
+<%- include('./includes/header') -%>
+<form action="/admin/upload" method="POST" enctype="multipart/form-data">
+  <select name="type" class="type_upload">
+    <option value="images">عکس</option>
+    <option value="videos">فیلم</option>
+    <option value="voices">صدا</option>
+  </select>
+  <input type="file" name="file">
+  <button type="submit">ارسال</button>
+</form>
+<%- include('./includes/footer') -%>

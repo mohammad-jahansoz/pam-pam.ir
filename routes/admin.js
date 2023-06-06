@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const adminController = require("../controller/admin");
+const upload = require("../middleware/upload");
 
+router.get("/upload", adminController.getUpload);
+router.post("/upload", upload, adminController.postUpload);
 router.get("/products", adminController.getProducts);
 router.get("/addProduct", adminController.getAddProduct);
 router.post("/addProduct", adminController.addProduct);
