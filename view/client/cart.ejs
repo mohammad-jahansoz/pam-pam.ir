@@ -2,14 +2,17 @@
 
 
 <% let totalPrice = 0 %>
+<% let totalPriceWithOff = 0 %>
+<% let totalOff = 0 %>
 <div class="small-container cart-page">
   <% if(cart.length > 0){ %>
-  <table>
+  <table style="border-bottom: 2px solid green;margin-bottom: 2rem;">
     <tr>
       <th>
         نام محصول
       </th>
       <th>قیمت * تعداد</th>
+      <th>تخفیف</th>
       <th>قیمت کل</th>
       <th>حذف</th>
     </tr>
@@ -24,8 +27,13 @@
         </a>
       </td>
       <td><%= item.productId.price %> * <%= item.quantity %></td>
-      <td><%= item.productId.price * item.quantity %></td>
+      <td><%= ((item.productId.price * item.quantity) / 100 *  item.productId.off).toLocaleString("fa") %></td>
+      <td><%= ((item.productId.price * item.quantity) / 100 * (100 - item.productId.off)).toLocaleString("fa") %></td>
+
       <% totalPrice += item.productId.price * item.quantity %>
+      <% totalPriceWithOff += (item.productId.price * item.quantity) / 100 * (100 - item.productId.off) %>
+      <% totalOff += (item.productId.price * item.quantity) / 100 *  item.productId.off %>
+
       <td>
         <a href="/api/product/deleteCartItem/<%= item.productId._id %>"><i class='bx bx-trash'></i></a>
       </td>
@@ -34,13 +42,23 @@
 
 
   </table>
-  <div>
-    <span>
-      <h4>جمع قیمت محصولات : <%= totalPrice.toLocaleString('fa') %></h4>
-      <h4>هزینه ارسال : 35,000</h4>
-      <h4>هزینه نهایی : <%= (totalPrice + 35000).toLocaleString('fa') %></h4>
-    </span>
-    <a href="/api/user/getOrderForm" class="btn">ادامه فرایند خرید</a>
+  <div style="display: flex; flex-direction: column;">
+    <div style="display: flex; align-items: center; justify-content: space-around; width: 100%;">
+      <span>
+        <h4>جمع قیمت محصولات قبل از تخفیف : <%= totalPrice.toLocaleString('fa') %></h4>
+        <h4> تخفیف : <%= totalOff.toLocaleString('fa') %></h4>
+        <h4>جمع قیمت محصولات بعد از تخفیف : <%= totalPriceWithOff.toLocaleString('fa') %></h4>
+        <h4>هزینه ارسال : <%= postPrice.toLocaleString('fa') %> </h4>
+        <h4>هزینه نهایی : <%= (totalPriceWithOff + postPrice).toLocaleString('fa') %></h4>
+      </span>
+      <span>
+        <input style="padding: 10px;color: #000;" type="text" placeholder="کد تخفیف">
+        <button onclick="this" class="btn">اعتبار سنجی</button>
+      </span>
+    </div>
+    <a href="/api/user/getOrderForm" style="width: 100%;
+    text-align: center;
+    margin-top: 2rem;" class="btn">ادامه فرایند خرید</a>
   </div>
   <% }else{ %>
   <div style="text-align: center; display: flex; flex-direction: column;">

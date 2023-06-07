@@ -4,6 +4,7 @@ const Product = require("../models/product");
 const User = require("../models/user");
 const Order = require("../models/order");
 const Upload = require("../models/uploads");
+const Off = require("../models/off");
 const fs = require("fs");
 
 exports.getEditProduct = async (req, res, next) => {
@@ -28,6 +29,7 @@ exports.postEditProduct = async (req, res, next) => {
   const imageUrl2 = req.body.imageUrl2;
   const imageUrl3 = req.body.imageUrl3;
   const imageUrl4 = req.body.imageUrl4;
+  const off = req.body.off;
   const relatedProductsBody = [
     relatedProduct1,
     relatedProduct2,
@@ -47,6 +49,7 @@ exports.postEditProduct = async (req, res, next) => {
     relatedProduct: relatedProducts,
     sale: sale,
     price: price,
+    off: off,
     details: details,
     imageUrl: [imageUrl1, imageUrl2, imageUrl3, imageUrl4],
     count: count,
@@ -74,6 +77,7 @@ exports.addProduct = async (req, res, next) => {
   const imageUrl2 = req.body.imageUrl2;
   const imageUrl3 = req.body.imageUrl3;
   const imageUrl4 = req.body.imageUrl4;
+  const off = req.body.off;
   const relatedProductsBody = [
     relatedProduct1,
     relatedProduct2,
@@ -92,6 +96,7 @@ exports.addProduct = async (req, res, next) => {
     details: details,
     category: category,
     count: count,
+    off: off,
     sale: sale,
     relatedProduct: relatedProducts,
     price: price,
@@ -268,4 +273,8 @@ exports.deleteFile = async (req, res, next) => {
   }
   await Upload.findByIdAndRemove(fileId);
   res.redirect(`/admin/uploads/${file.type}`);
+};
+
+exports.verifyOffCode = async (req, res, next) => {
+  const code = req.body.code;
 };

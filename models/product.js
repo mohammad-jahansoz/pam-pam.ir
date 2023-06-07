@@ -21,6 +21,10 @@ const ProductSchema = new Schema(
           "https://apollobattery.com.au/wp-content/uploads/2022/08/default-product-image.png",
       },
     ],
+    off: {
+      type: Number,
+      default: 0,
+    },
     count: {
       type: Number,
       default: 0,

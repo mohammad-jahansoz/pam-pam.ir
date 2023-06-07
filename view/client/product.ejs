@@ -11,7 +11,6 @@
     <div class="row-sp">
       <div class="col-2">
         <img src="<%= product.imageUrl[0] %>" alt="" width="100%" id="ProductImg" />
-
         <div class="small-img-row">
           <div class="small-img-col">
             <img src="<%= product.imageUrl[0] %>" alt="" width="100%" class="small-img" />
@@ -33,7 +32,13 @@
         </span>
 
         <h1><%= product.name %></h1>
-        <h4><%= product.price.toLocaleString('fa') %> تومان</h4>
+        <span style="display: flex;align-items: center;  gap: 1rem;">
+          <h4 style="<%= (product.off) ? "text-decoration: line-through;color: gray;" : "" %>"><%= product.price.toLocaleString('fa') %> تومان</h4>
+          <% if(product.off){ %>
+          <h4><%= (product.price / 100 * (100 - product.off )).toLocaleString('fa') %> تومان</h4>
+          <% } %>
+        </span>
+
         <!-- <select>
         <option>Select Size</option>
         <option>XXL</option>

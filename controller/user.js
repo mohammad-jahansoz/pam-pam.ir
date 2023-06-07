@@ -49,6 +49,7 @@ exports.getCart = async (req, res, next) => {
   res.render("client/cart", {
     cart: userWithProductsInCart.cart,
     path: "cart",
+    postPrice: +process.env.POST_PRICE,
   });
 };
 
@@ -58,9 +59,12 @@ exports.setOrder = async (req, res, next) => {
     "-relatedProduct -category -views -likes -comments -createdAt -updatedAt -__v "
   );
 
-  let totalPrice = 35000;
+  let totalPrice = +process.env.POST_PRICE;
   for (const product of userWithProductsInCart.cart) {
-    totalPrice += product.quantity * product.productId.price;
+    totalPrice +=
+      ((product.productId.price * product.quantity) / 100) *
+      (100 - product.productId.off);
+    // totalPrice += product.quantity * product.productId.price;
   }
   const shopTrackingCode = Math.floor(100000 + Math.random() * 900000);
 

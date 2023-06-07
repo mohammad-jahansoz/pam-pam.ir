@@ -19,6 +19,7 @@
         <option <%= (product.category === "میوه پفکی") ? "selected" : "" %> value="میوه پفکی">میوه پفکی</option>
       </select>
     </div>
+
     <input type="text" name="details" value="<%= product.details %>" placeholder="جزئیات">
     <input type="text" name="relatedProduct1" value="<%= product.relatedProduct[0] %>" placeholder="آی دی کالای مربوط">
     <input type="text" name="relatedProduct2" value="<%= product.relatedProduct[1] %>" placeholder="آی دی کالای مربوط">
@@ -28,6 +29,7 @@
     <input type="text" name="imageUrl2" value="<%= product.imageUrl[1] %>" placeholder="لینک عکس">
     <input type="text" name="imageUrl3" value="<%= product.imageUrl[2] %>" placeholder="لینک عکس">
     <input type="text" name="imageUrl4" value="<%= product.imageUrl[3] %>" placeholder="لینک عکس">
+    <input type="number" name="off" value="<%= product.off %>" placeholder="درصد تخفیف">
     <button class="btn" type="submit">Edit Post</button>
   </form>
 </div>
