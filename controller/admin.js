@@ -4,6 +4,7 @@ const Product = require("../models/product");
 const User = require("../models/user");
 const Order = require("../models/order");
 const Upload = require("../models/uploads");
+const fs = require("fs");
 
 exports.getEditProduct = async (req, res, next) => {
   const productId = req.params.id;
@@ -238,10 +239,33 @@ exports.getUpload = (req, res, next) => {
 };
 
 exports.postUpload = async (req, res, next) => {
+  const type = req.body.type;
   let files = [];
   for (f of req.files) {
-    files.push({ url: "/" + f.path, type: req.body.type });
+    files.push({ url: "/" + f.path, type: type });
   }
   await Upload.insertMany(files);
-  res.redirect("/admin/upload");
+  res.redirect("/admin/uploads/" + type);
+};
+
+exports.getUploads = async (req, res, next) => {
+  const type = req.params.type;
+  const files = await Upload.find({ type: type });
+  res.render("admin/uploads", { files, type });
+};
+
+exports.deleteFile = async (req, res, next) => {
+  const fileId = req.params.fileId;
+  console.log(fileId);
+  const file = await Upload.findById(fileId);
+  const filePath = "." + file.url;
+  // replace all "\" with "/" . beacuse multer file path give us  "\" . and replace method dont work with "\"
+  const fixFilePath = filePath.replace(/\\/g, "/");
+  try {
+    fs.unlinkSync(fixFilePath);
+  } catch (err) {
+    console.log(err);
+  }
+  await Upload.findByIdAndRemove(fileId);
+  res.redirect(`/admin/uploads/${file.type}`);
 };

@@ -31,5 +31,7 @@ router.post("/api/order/search", adminController.searchOrder);
 router.get("/signin", adminController.getSignIn);
 router.post("/orders/:orderId", adminController.postEditOrder);
 router.get("/order/:orderId", adminController.getOrder);
+router.get("/uploads/:type", adminController.getUploads);
+router.get("/upload/delete/:fileId", adminController.deleteFile);
 
 module.exports = router;

@@ -1,0 +1,20 @@
+<%- include('./includes/head') -%>
+<%- include('./includes/header') -%>
+<div class="products-container">
+  <% if( type === "images"){ %>
+  <% for(file of files){ %>
+  <div class="uploads-images">
+    <img src="<%= file.url %>" style="width: 100%;">
+    <span>
+      <a href="">کپی لینک</a>
+      <a style="background-color: red;" href="/admin/upload/delete/<%= file._id %>">حذف</a>
+    </span>
+  </div>
+  <% } %>
+  <% }else if(type === "voices"){ %>
+  <h3>صدا</h3>
+  <% }else if(type === "videos"){ %>
+  <h3>ویدئو</h3>
+  <% } %>
+</div>
+<%- include('./includes/footer') -%>
