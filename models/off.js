@@ -10,7 +10,11 @@ const offSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  percent: {
+    type: Number,
+    required: true,
+  },
 });
 
-const off = mongoose.model("off", offSchema);
+const off = mongoose.model("offCode", offSchema);
 module.exports = off;

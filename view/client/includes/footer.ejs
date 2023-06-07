@@ -195,6 +195,48 @@
          console.error(error);
        });
    }
+
+   function verifyOffCode(btn) {
+     const offEl = btn.parentNode;
+     const offCode = offEl.querySelector("#offCode").value;
+
+     fetch("/offCode/verify", {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/json"
+         },
+         body: JSON.stringify({
+           offCode: offCode
+         })
+       }).then(response => response.json())
+       .then(off => {
+         if (off) {
+           console.log("code doroste");
+           document.querySelector("#offCodeMessage").textContent = `${off.percent} درصد تخفیف اعمال شد.`
+           document.querySelector("#offCodeMessage").style.border = "2px solid green"
+           document.querySelector("#offCodeMessage").style.borderRadius = "2rem"
+           offEl.querySelector("#offCode").disabled = true;
+           btn.disabled = true;
+
+           const tpp = document.getElementById('hiddenTotalPriceWithOff').textContent
+           const payWithOff = tpp / 100 * (100 - off.percent);
+           document.querySelector('#totalPricePay').parentNode.style.textDecoration = "line-through"
+           document.querySelector('#totalPricePay').parentNode.style.color = "gray"
+           document.querySelector('#totalPricePay').style.color = "gray"
+           //  document.querySelector('#totalPricePay').parentNode.textContent += payWithOff.toLocaleString("fa")
+           //  payWithOff.toLocaleString("fa")
+
+
+         } else {
+           console.log("code bad va eshtebahe");
+           document.querySelector("#offCodeMessage").textContent = "کد تخفیف وارد شده منقضی شده یا اشتباه است!"
+           document.querySelector("#offCodeMessage").style.border = "2px solid red"
+           document.querySelector("#offCodeMessage").style.borderRadius = "2rem"
+         }
+       }).catch(error => {
+         console.error(error);
+       });
+   }
  </script>
  </body>
 

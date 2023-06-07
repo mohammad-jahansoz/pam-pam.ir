@@ -5,6 +5,7 @@ const nodemailer = require("nodemailer");
 const ejs = require("ejs");
 const puppeteer = require("puppeteer");
 const zarinpal_checkout = require("zarinpal-checkout");
+const Off = require("../models/off");
 
 const zarinpal = zarinpal_checkout.create(
   "d9d88b03-3514-490a-b6f4-a864a44e0d39",
@@ -182,4 +183,18 @@ exports.downloadReceipt = async (req, res, next) => {
   res.setHeader("Content-Disposition", "attachment; filename=invoice.pdf");
   res.send(pdf);
   page.close();
+};
+
+exports.verifyOffCode = async (req, res, next) => {
+  const offCode = req.body.offCode;
+  const code = await Off.findOne({ code: offCode });
+  if (code && code.count > 0) {
+    res.json({
+      code: offCode,
+      percent: code.percent,
+    });
+  } else {
+    res.json(false);
+  }
+  res.end();
 };

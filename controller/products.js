@@ -1,5 +1,6 @@
 const { mongoose } = require("mongoose");
 const Product = require("../models/product");
+
 exports.getProduct = async (req, res, next) => {
   const productId = req.params.id;
   if (!mongoose.Types.ObjectId.isValid(productId)) {

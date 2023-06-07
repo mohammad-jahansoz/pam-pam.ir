@@ -12,6 +12,7 @@ router.get(
   "/api/product/getProducts/:category",
   productsController.getProducts
 );
+router.post("/offCode/verify", isAuth, userController.verifyOffCode);
 router.get("/api/product/getCart", isAuth, userController.getCart);
 router.put("/api/product/like/:id", productsController.setLike);
 router.post("/api/product/comment/:id", productsController.setComment);

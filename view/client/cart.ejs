@@ -45,15 +45,20 @@
   <div style="display: flex; flex-direction: column;">
     <div style="display: flex; align-items: center; justify-content: space-around; width: 100%;">
       <span>
-        <h4>جمع قیمت محصولات قبل از تخفیف : <%= totalPrice.toLocaleString('fa') %></h4>
-        <h4> تخفیف : <%= totalOff.toLocaleString('fa') %></h4>
-        <h4>جمع قیمت محصولات بعد از تخفیف : <%= totalPriceWithOff.toLocaleString('fa') %></h4>
-        <h4>هزینه ارسال : <%= postPrice.toLocaleString('fa') %> </h4>
-        <h4>هزینه نهایی : <%= (totalPriceWithOff + postPrice).toLocaleString('fa') %></h4>
+
+        <h4>جمع قیمت محصولات قبل از تخفیف : <span id="totalPrice"><%= totalPrice.toLocaleString('fa') %></span> </h4>
+        <h4> تخفیف : <span id="totalOff"><%= totalOff.toLocaleString('fa') %></span></h4>
+        <h4>جمع قیمت محصولات بعد از تخفیف : <span id="totalPriceWithOff"><%= totalPriceWithOff.toLocaleString('fa') %></span></h4>
+        <h4 id="hiddenTotalPriceWithOff" style="display: none;"><%= totalPriceWithOff %></h4>
+        <h4>هزینه ارسال : <span id="postPrice"><%= postPrice.toLocaleString('fa') %></span> </h4>
+        <h4>هزینه نهایی : <span id="totalPricePay"><%= (totalPriceWithOff + postPrice).toLocaleString('fa') %></span></h4>
       </span>
       <span>
-        <input style="padding: 10px;color: #000;" type="text" placeholder="کد تخفیف">
-        <button onclick="this" class="btn">اعتبار سنجی</button>
+        <span>
+          <input style="padding: 10px;color: #000;" name="offCode" id="offCode" type="text" placeholder="کد تخفیف">
+          <button onclick="verifyOffCode(this)" class="btn">اعتبار سنجی</button>
+        </span>
+        <p id="offCodeMessage" style="margin-top: 1rem;text-align: center;">اگر کد تخفیف دارید اینجا وارد کنید!</p>
       </span>
     </div>
     <a href="/api/user/getOrderForm" style="width: 100%;

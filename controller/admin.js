@@ -274,7 +274,3 @@ exports.deleteFile = async (req, res, next) => {
   await Upload.findByIdAndRemove(fileId);
   res.redirect(`/admin/uploads/${file.type}`);
 };
-
-exports.verifyOffCode = async (req, res, next) => {
-  const code = req.body.code;
-};
