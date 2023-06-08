@@ -26,8 +26,9 @@ router.get(
   isAuth,
   userController.deleteCartItem
 );
-router.get("/api/user/getOrderForm", isAuth, userController.getOrderForm);
-router.post("/api/user/orderForm", isAuth, userController.setOrder);
+
+router.post("/api/user/orderForm", isAuth, userController.updateOrder);
+router.post("/api/user/setOrder", isAuth, userController.setOrder);
 router.get("/api/user/getOrders", isAuth, userController.getOrders);
 router.get(
   "/api/user/downloadReceipt/:orderId",

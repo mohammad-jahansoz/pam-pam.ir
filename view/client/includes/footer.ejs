@@ -199,6 +199,7 @@
    function verifyOffCode(btn) {
      const offEl = btn.parentNode;
      const offCode = offEl.querySelector("#offCode").value;
+     btn.textContent = "صبر کنید..."
 
      fetch("/offCode/verify", {
          method: "POST",
@@ -217,18 +218,22 @@
            document.querySelector("#offCodeMessage").style.borderRadius = "2rem"
            offEl.querySelector("#offCode").disabled = true;
            btn.disabled = true;
-
-           const tpp = document.getElementById('hiddenTotalPriceWithOff').textContent
+           btn.textContent = "اعمال شد."
+           const tpp = document.getElementById('hiddenTotalPricePay').textContent
            const payWithOff = tpp / 100 * (100 - off.percent);
            document.querySelector('#totalPricePay').parentNode.style.textDecoration = "line-through"
            document.querySelector('#totalPricePay').parentNode.style.color = "gray"
            document.querySelector('#totalPricePay').style.color = "gray"
-           //  document.querySelector('#totalPricePay').parentNode.textContent += payWithOff.toLocaleString("fa")
-           //  payWithOff.toLocaleString("fa")
+           document.getElementById('offCodeHidden').value = offCode;
+           document.getElementById('finalPriceWithOff').textContent = ` مبلغ قابل پرداخت : ${payWithOff.toLocaleString("fa")} تومان`
+           const all = parseInt(document.getElementById('hiddenTotalOff').textContent) + parseInt(tpp);
+           const newOff = all - payWithOff;
+           document.getElementById('totalOff').textContent = newOff.toLocaleString('fa')
+           document.getElementById('totalOff').style.color = "#6ec22f"
 
 
          } else {
-           console.log("code bad va eshtebahe");
+           btn.textContent = "اعتبار سنجی"
            document.querySelector("#offCodeMessage").textContent = "کد تخفیف وارد شده منقضی شده یا اشتباه است!"
            document.querySelector("#offCodeMessage").style.border = "2px solid red"
            document.querySelector("#offCodeMessage").style.borderRadius = "2rem"

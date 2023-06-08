@@ -54,62 +54,114 @@ exports.getCart = async (req, res, next) => {
   });
 };
 
+exports.updateOrder = async (req, res, next) => {
+  const orderId = req.body.orderId;
+  const order = await Order.findById(orderId);
+
+  const payment = await zarinpal.PaymentRequest({
+    Amount: order.paymentInfo.totalPrice,
+    CallbackURL: "http://127.0.0.1:3000/api/product/verifyOrder",
+    Description: "خرید از فروشگاه اینترنتی پم پم - PAM-PAM.IR",
+    Email: req.user.email,
+  });
+  if (payment.status === 100) {
+    res.redirect(payment.url);
+    await Order.findByIdAndUpdate(orderId, {
+      $set: {
+        user: {
+          name: req.body.name,
+          email: req.user.email,
+          phoneNumber: req.body.phoneNumber,
+          address: {
+            province: req.body.province,
+            city: req.body.city,
+            address: req.body.address,
+            postCode: req.body.postCode,
+          },
+        },
+        note: req.body.note,
+        paymentInfo: {
+          offCode: order.paymentInfo.offCode,
+          offPercent: order.paymentInfo.offPercent,
+          totalPrice: order.paymentInfo.totalPrice,
+          shopTrackingCode: order.paymentInfo.shopTrackingCode,
+          referenceId: payment.authority,
+        },
+      },
+    });
+    // await Order.findByIdAndUpdate(orderId, {
+    //   $set: {
+    //     user: {
+    //       name: req.body.name,
+    //       email: req.user.email,
+    //       phoneNumber: req.body.phoneNumber,
+    //       address: {
+    //         province: req.body.province,
+    //         city: req.body.city,
+    //         address: req.body.address,
+    //         postCode: req.body.postCode,
+    //       },
+    //     },
+    //     note: req.body.note,
+    //     paymentInfo: {
+    //       offCode: order.paymentInfo.offCode,
+    //       offPercent: order.paymentInfo.offPercent,
+    //       totalPrice: order.paymentInfo.totalPrice,
+    //       shopTrackingCode: order.paymentInfo.shopTrackingCode,
+    //       referenceId: payment.authority,
+    //     },
+    //   },
+    // });
+  } else {
+    res.send("لطفا دقایقی دیگر مجددا تلاش کنید!");
+  }
+};
+
 exports.setOrder = async (req, res, next) => {
+  const offCode = req.body.offCode;
   const userWithProductsInCart = await req.user.populate(
     "cart.productId",
     "-relatedProduct -category -views -likes -comments -createdAt -updatedAt -__v "
   );
 
+  const off = await Off.findOne({ code: offCode });
   let totalPrice = +process.env.POST_PRICE;
   for (const product of userWithProductsInCart.cart) {
     totalPrice +=
       ((product.productId.price * product.quantity) / 100) *
       (100 - product.productId.off);
-    // totalPrice += product.quantity * product.productId.price;
   }
+
+  if (off) {
+    totalPrice = (totalPrice / 100) * (100 - off.percent);
+  }
+
   const shopTrackingCode = Math.floor(100000 + Math.random() * 900000);
 
-  const payment = await zarinpal.PaymentRequest({
-    Amount: totalPrice,
-    CallbackURL: "http://127.0.0.1:3000/api/product/verifyOrder",
-    Description: "خرید از فروشگاه اینترنتی پم پم - PAM-PAM.IR",
-    Email: req.user.email,
-    Mobile: req.body.phoneNumber,
+  const order = new Order({
+    user: {
+      _id: req.user._id,
+      email: req.user.email,
+    },
+    products: userWithProductsInCart.cart,
+    paymentInfo: {
+      offCode: off ? off.code : "",
+      offPercent: off ? off.percent : 0,
+      totalPrice: totalPrice,
+      shopTrackingCode: shopTrackingCode,
+    },
   });
 
-  if (payment.status === 100) {
-    res.redirect(payment.url);
-    const order = new Order({
-      user: {
-        _id: req.user._id,
-        email: req.user.email,
-        name: req.body.name,
-        phoneNumber: req.body.phoneNumber,
-        address: {
-          province: req.body.province,
-          city: req.body.city,
-          address: req.body.address,
-          postCode: req.body.postCode,
-        },
-      },
-      note: req.body.note,
-      products: userWithProductsInCart.cart,
-      paymentInfo: {
-        totalPrice: totalPrice,
-        shopTrackingCode: shopTrackingCode,
-        referenceId: payment.authority,
-      },
-    });
-
-    await order.save();
-    await User.findByIdAndUpdate(req.user._id, {
-      $push: {
-        order: order._id,
-      },
-    });
-  } else {
-    res.send("لطفا بعدا دوباره امتحان کنید!");
-  }
+  await order.save();
+  await User.findByIdAndUpdate(req.user._id, {
+    $push: {
+      order: order._id,
+    },
+  });
+  res.render("client/orderForm", {
+    orderId: order._id,
+    totalPrice: order.paymentInfo.totalPrice,
+  });
 };
 
 exports.verifyOrder = async (req, res, next) => {
@@ -127,6 +179,10 @@ exports.verifyOrder = async (req, res, next) => {
       order.status = 2;
       order.paymentInfo.bankTrackingCode = receipt.RefID;
       order.save();
+      await Off.updateOne(
+        { code: order.paymentInfo.offCode },
+        { $inc: { count: -1 } }
+      );
       res.render("client/receipt", { order, receipt });
     } else {
       return res.render("client/receipt", { order, receipt });
@@ -145,14 +201,6 @@ exports.verifyOrder = async (req, res, next) => {
       $inc: { count: -product.quantity },
     });
   }
-};
-
-exports.getOrderForm = (req, res, next) => {
-  res.render("client/orderForm");
-};
-
-exports.designOrder = (req, res, next) => {
-  res.render("client/receipt");
 };
 
 exports.getOrders = async (req, res, next) => {

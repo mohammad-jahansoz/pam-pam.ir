@@ -15,7 +15,8 @@
     <input type="text" name="address" placeholder="آدرس">
     <input type="number" name="postCode" placeholder="کد پستی">
     <input type="text" name="note" placeholder="اگر پیغام خاصی دارید میتونید اینجا بنویسید!">
-    <button type="submit" class="btn">ورود به درگاه پرداخت</button>
+    <input type="hidden" name="orderId" value="<%= orderId %>">
+    <button type="submit" class="btn">پرداخت <%= totalPrice.toLocaleString('fa') %> تومان</button>
   </form>
 </div>
 

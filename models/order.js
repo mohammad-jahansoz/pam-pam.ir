@@ -6,11 +6,9 @@ const orderSchema = new mongoose.Schema(
       _id: mongoose.Schema.Types.ObjectId,
       email: String,
       name: {
-        required: true,
         type: String,
       },
       phoneNumber: {
-        required: true,
         type: Number,
       },
       address: {
@@ -38,6 +36,8 @@ const orderSchema = new mongoose.Schema(
     },
     note: String,
     paymentInfo: {
+      offCode: String,
+      offPercent: Number,
       totalPrice: Number,
       shopTrackingCode: Number,
       postTrackingCode: String,

@@ -46,24 +46,29 @@
     <div style="display: flex; align-items: center; justify-content: space-around; width: 100%;">
       <span>
 
-        <h4>جمع قیمت محصولات قبل از تخفیف : <span id="totalPrice"><%= totalPrice.toLocaleString('fa') %></span> </h4>
-        <h4> تخفیف : <span id="totalOff"><%= totalOff.toLocaleString('fa') %></span></h4>
-        <h4>جمع قیمت محصولات بعد از تخفیف : <span id="totalPriceWithOff"><%= totalPriceWithOff.toLocaleString('fa') %></span></h4>
-        <h4 id="hiddenTotalPriceWithOff" style="display: none;"><%= totalPriceWithOff %></h4>
+        <h4>مبلغ کل: <span id="totalPrice"><%= totalPrice.toLocaleString('fa') %></span> </h4>
+        <h4 style="display: none;">مبلغ کل: <span id="hiddenTotalPrice"><%= totalPrice %></span> </h4>
         <h4>هزینه ارسال : <span id="postPrice"><%= postPrice.toLocaleString('fa') %></span> </h4>
-        <h4>هزینه نهایی : <span id="totalPricePay"><%= (totalPriceWithOff + postPrice).toLocaleString('fa') %></span></h4>
+        <h4> تخفیف : <span id="totalOff"><%= totalOff.toLocaleString('fa') %></span></h4>
+        <h4 style="display: none;"> تخفیف : <span id="hiddenTotalOff"><%= totalOff %></span></h4>
+        <h4>مبلغ قابل پرداخت : <span id="totalPricePay"><%= (totalPriceWithOff + postPrice).toLocaleString('fa') %></span> تومان</h4>
+        <h4 style="display: none;"><span id="hiddenTotalPricePay"><%= (totalPriceWithOff + postPrice) %></span></h4>
+        <h4 id="finalPriceWithOff"></h4>
       </span>
       <span>
         <span>
           <input style="padding: 10px;color: #000;" name="offCode" id="offCode" type="text" placeholder="کد تخفیف">
-          <button onclick="verifyOffCode(this)" class="btn">اعتبار سنجی</button>
+          <button onclick="verifyOffCode(this)" id="offVerifyBtn" class="btn">اعتبار سنجی</button>
         </span>
         <p id="offCodeMessage" style="margin-top: 1rem;text-align: center;">اگر کد تخفیف دارید اینجا وارد کنید!</p>
       </span>
     </div>
-    <a href="/api/user/getOrderForm" style="width: 100%;
+    <form action="/api/user/setOrder/" style="width: 100%;" method="POST">
+      <input type="hidden" id="offCodeHidden" name="offCode">
+      <button type="submit" style="width: 100%;
     text-align: center;
-    margin-top: 2rem;" class="btn">ادامه فرایند خرید</a>
+    margin-top: 2rem;" class="btn">ادامه فرایند خرید</button>
+    </form>
   </div>
   <% }else{ %>
   <div style="text-align: center; display: flex; flex-direction: column;">
